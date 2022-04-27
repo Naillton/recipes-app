@@ -2,11 +2,15 @@ import React, { useState } from 'react';
 
 function Search() {
   const [saveSearchInput, setSaveSearchInput] = useState('');
+  const [saveRadio, setSaveRadio] = useState('');
+  console.log(saveRadio, saveSearchInput);
 
-  function handleChange({ target }) {
-    const { value } = target;
+  function handleChange({ target: { value } }) {
     setSaveSearchInput(value);
-    console.log(value);
+  }
+
+  function handleRadio({ target: { id } }) {
+    setSaveRadio(id);
   }
 
   return (
@@ -28,7 +32,7 @@ function Search() {
             name="radioSearch"
             id="ingredientSearch"
             data-testid="ingredient-search-radio"
-            onChange={ () => {} }
+            onChange={ handleRadio }
           />
         </label>
         <label htmlFor="nameSearch">
@@ -38,7 +42,7 @@ function Search() {
             name="radioSearch"
             id="nameSearch"
             data-testid="name-search-radio"
-            onChange={ () => {} }
+            onChange={ handleRadio }
           />
         </label>
         <label htmlFor="firstLetterSearch">
@@ -48,7 +52,7 @@ function Search() {
             name="radioSearch"
             id="firstLetterSearch"
             data-testid="first-letter-search-radio"
-            onChange={ () => {} }
+            onChange={ handleRadio }
           />
         </label>
         <button
