@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
+import AppProvider from './context/AppProvider';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -22,7 +23,7 @@ import FoodsNacionalities from './pages/FoodsNacionalities';
 
 function App() {
   return (
-    <div>
+    <AppProvider>
       <Switch>
         <Route path="/" component={ Login } exact />
         <Route path="/foods" component={ Foods } exact />
@@ -57,7 +58,7 @@ function App() {
         <Route path="/done-recipes" component={ DoneRecipes } exact />
         <Route path="/favorite-recipes" component={ FavoriteRecipes } exact />
       </Switch>
-    </div>
+    </AppProvider>
   );
 }
 
