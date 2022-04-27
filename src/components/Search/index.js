@@ -6,6 +6,7 @@ function Search() {
   function handleChange({ target }) {
     const { value } = target;
     setSaveSearchInput(value);
+    console.log(value);
   }
 
   return (
