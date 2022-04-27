@@ -14,7 +14,7 @@ export const categoriesList = async () => {
   return data;
 };
 
-// Lista de todos os ingredientes (com descrição)
+// Lista de todos os ingredientes (com descrição) esse
 export const ingredientsList = async () => {
   const endpoint = 'www.themealdb.com/api/json/v1/1/list.php?i=list';
   const response = await fetch(endpoint);
@@ -54,7 +54,7 @@ export const ingredientsSearch = async (ingredient) => {
   return data;
 };
 
-// Pesquisa por nome
+// Pesquisa por nome esse
 export const nameSearch = async (name) => {
   const endpoint = `https://www.themealdb.com/api/json/v1/1/search.php?s=${name}`;
   const response = await fetch(endpoint);
@@ -62,7 +62,7 @@ export const nameSearch = async (name) => {
   return data;
 };
 
-// Pesquisa por Primeira letra
+// Pesquisa por Primeira letra esse
 export const firstLetterSearch = async (firstLetter) => {
   const endpoint = `https://www.themealdb.com/api/json/v1/1/search.php?f=${firstLetter}`;
   const response = await fetch(endpoint);
