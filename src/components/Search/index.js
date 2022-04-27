@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import AppContext from '../../context/AppContext';
 
 function Search() {
+  const { handleCLickIngredients } = useContext(AppContext);
   const [saveSearchInput, setSaveSearchInput] = useState('');
   const [saveRadio, setSaveRadio] = useState('');
-  console.log(saveRadio, saveSearchInput);
 
   function handleChange({ target: { value } }) {
     setSaveSearchInput(value);
@@ -58,7 +59,7 @@ function Search() {
         <button
           type="button"
           data-testid="exec-search-btn"
-          onClick={ () => {} }
+          onClick={ () => handleCLickIngredients(saveSearchInput, saveRadio) }
         >
           Search
         </button>
