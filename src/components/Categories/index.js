@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import AppContext from '../../context/AppContext';
 
 import {
@@ -11,15 +11,15 @@ import { categoriesList, categoryFilter, nameSearch } from '../../api/foodsAPI';
 const cinco = 5;
 
 function Categories() {
-  const { page, setData, categories, setCategories } = useContext(AppContext);
-  const [category, setCategory] = useState('');
+  const { page,
+    setData, categories, setCategories, category, setCategory } = useContext(AppContext);
 
   useEffect(() => {
     if (page === 'Foods') {
       const resultFoodCategories = async () => {
         const apiResult = await categoriesList();
         console.log(apiResult);
-        setCategories(apiResult.meals);
+        setCategories(apiResult);
       };
       resultFoodCategories();
       return;
@@ -56,6 +56,7 @@ function Categories() {
       return;
     }
     setData(await ingredientDrinkName());
+    setCategory('');
   };
 
   return (

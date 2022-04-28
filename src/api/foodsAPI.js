@@ -11,7 +11,7 @@ export const categoriesList = async () => {
   const endpoint = 'https://www.themealdb.com/api/json/v1/1/list.php?c=list';
   const response = await fetch(endpoint);
   const data = await response.json();
-  return data;
+  return data.meals;
 };
 
 // Lista de todos os ingredientes (com descrição) esse
@@ -35,7 +35,7 @@ export const categoryFilter = async (category) => {
   const endpoint = `https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`;
   const response = await fetch(endpoint);
   const data = await response.json();
-  return data;
+  return data.meals;
 };
 
 // Filtra por nacionalidade
@@ -51,7 +51,7 @@ export const ingredientsSearch = async (ingredient) => {
   const endpoint = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingredient}`;
   const response = await fetch(endpoint);
   const data = await response.json();
-  return data;
+  return data.meals;
 };
 
 // Pesquisa por nome esse
@@ -59,7 +59,7 @@ export const nameSearch = async (name = '') => {
   const endpoint = `https://www.themealdb.com/api/json/v1/1/search.php?s=${name}`;
   const response = await fetch(endpoint);
   const data = await response.json();
-  return data;
+  return data.meals;
 };
 
 // Pesquisa por Primeira letra esse
@@ -67,7 +67,7 @@ export const firstLetterSearch = async (firstLetter) => {
   const endpoint = `https://www.themealdb.com/api/json/v1/1/search.php?f=${firstLetter}`;
   const response = await fetch(endpoint);
   const data = await response.json();
-  return data;
+  return data.meals;
 };
 
 // Pesquisa por ID

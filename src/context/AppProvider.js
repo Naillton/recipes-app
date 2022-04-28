@@ -10,6 +10,7 @@ function AppProvider({ children }) {
   const [data, setData] = useState([]);
   const [page, setPage] = useState('');
   const [categories, setCategories] = useState([]);
+  const [category, setCategory] = useState('');
 
   const handleFoods = async (input, radio) => {
     if (radio === 'ingredientSearch') {
@@ -58,6 +59,8 @@ function AppProvider({ children }) {
         page,
         setCategories,
         categories,
+        category,
+        setCategory,
       } }
     >
       { children }

@@ -9,7 +9,7 @@ import Categories from '../components/Categories';
 
 const doze = 12;
 function Foods() {
-  const { setPage, setData, data, categories } = useContext(AppContext);
+  const { setPage, setData, data, category } = useContext(AppContext);
 
   const history = useHistory();
 
@@ -26,14 +26,14 @@ function Foods() {
   }, []);
 
   useEffect(() => {
-    if (categories.length === 0 && data.meals && data.meals.length === 1) {
-      history.push(`/foods/${data.meals[0].idMeal}`);
+    if (data && category === '' && data.length === 1) {
+      history.push(`/foods/${data[0].idMeal}`);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data, history]);
+  }, [data]);
 
   useEffect(() => {
-    if (data.meals === null) {
+    if (data === null) {
       return global.alert('Sorry, we haven\'t found any recipes for these filters.');
     }
   }, [data]);
@@ -42,7 +42,7 @@ function Foods() {
     <div>
       <Header title="Foods" show />
       <Categories />
-      {data.meals && data.meals.filter((f, i) => i < doze).map((food, index) => (
+      {data && data.filter((f, i) => i < doze).map((food, index) => (
         <Link to={ `/foods/${food.idMeal}` } key={ index }>
           <RecipeCard
             index={ index }
