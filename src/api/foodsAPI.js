@@ -55,7 +55,7 @@ export const ingredientsSearch = async (ingredient) => {
 };
 
 // Pesquisa por nome esse
-export const nameSearch = async (name) => {
+export const nameSearch = async (name = '') => {
   const endpoint = `https://www.themealdb.com/api/json/v1/1/search.php?s=${name}`;
   const response = await fetch(endpoint);
   const data = await response.json();

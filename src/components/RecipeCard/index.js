@@ -6,7 +6,6 @@ function RecipeCard({ index, img, name }) {
     <div data-testid={ `${index}-recipe-card` }>
       <img src={ img } data-testid={ `${index}-card-img` } alt={ name } />
       <p data-testid={ `${index}-card-name` }>{name}</p>
-      <p data-testid={ `${index}-card-name` }>{name}</p>
     </div>
   );
 }
