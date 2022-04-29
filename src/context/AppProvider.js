@@ -9,6 +9,8 @@ function AppProvider({ children }) {
   const [showSearch, setShowSearch] = useState(false);
   const [data, setData] = useState([]);
   const [page, setPage] = useState('');
+  const [categories, setCategories] = useState([]);
+  const [category, setCategory] = useState('');
 
   const handleFoods = async (input, radio) => {
     if (radio === 'ingredientSearch') {
@@ -52,7 +54,13 @@ function AppProvider({ children }) {
         setShowSearch,
         handleCLickIngredients,
         data,
+        setData,
         setPage,
+        page,
+        setCategories,
+        categories,
+        category,
+        setCategory,
       } }
     >
       { children }
@@ -62,6 +70,6 @@ function AppProvider({ children }) {
 
 AppProvider.propTypes = ({
   children: PropTypes.any,
-}).isRequered;
+}).isRequired;
 
 export default AppProvider;

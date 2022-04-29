@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-import addToken from '../../helpers/tokenLocalStorage';
+import { addToken } from '../../helpers/tokenLocalStorage';
 
 export default function Login() {
   const [credential, setCredential] = useState({
