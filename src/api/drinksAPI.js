@@ -32,3 +32,11 @@ export const categoryFilterDrink = async (category) => {
   const data = await response.json();
   return data;
 };
+
+// Bebidas aleatórias
+export const drinkRandom = async () => {
+  const endpoint = 'https://www.thecocktaildb.com/api/json/v1/1/random.php';
+  const response = await fetch(endpoint);
+  const { drinks } = await response.json();
+  return drinks;
+};

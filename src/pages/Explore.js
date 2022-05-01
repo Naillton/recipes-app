@@ -20,7 +20,7 @@ function Explore() {
         <button
           type="button"
           data-testid="explore-drinks"
-          onClick={ () => push('explore/drinks') }
+          onClick={ () => push('/explore/drinks') }
         >
           Explore Drinks
         </button>
