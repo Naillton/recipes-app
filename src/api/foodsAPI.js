@@ -16,7 +16,7 @@ export const categoriesList = async () => {
 
 // Lista de todos os ingredientes (com descrição) esse
 export const ingredientsList = async () => {
-  const endpoint = 'www.themealdb.com/api/json/v1/1/list.php?i=list';
+  const endpoint = 'https://www.themealdb.com/api/json/v1/1/list.php?i=list';
   const response = await fetch(endpoint);
   const data = await response.json();
   return data;

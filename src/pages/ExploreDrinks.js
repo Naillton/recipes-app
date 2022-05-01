@@ -3,7 +3,6 @@ import { useHistory } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { drinkRandom } from '../api/drinksAPI';
-// push(`/drinks/${}`)
 
 function ExploreDrinks() {
   const { push } = useHistory();
