@@ -42,7 +42,7 @@ function Drinks() {
           <RecipeCard
             index={ index }
             name={ drink.strDrink }
-            img={ drink.strDrinkThumb }
+            img={ `${drink.strDrinkThumb}/preview` }
             key={ index }
           />
         </Link>

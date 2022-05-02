@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 function RecipeCard({ index, img, name, ingredient }) {
-  console.log(ingredient);
   return (
     <div
       data-testid={
