@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ingredientDrinkName } from '../api/drinksAPI';
+import { drinksIngredients } from '../api/drinksAPI';
 import Header from '../components/Header';
 import RecipeCard from '../components/RecipeCard';
 import Footer from '../components/Footer';
@@ -11,9 +11,9 @@ function ExploreDrinksIngredients() {
 
   useEffect(() => {
     const getList = async () => {
-      const list = await ingredientDrinkName();
-      console.log(list.drinks);
-      setIngredientsList(list.drinks);
+      const list = await drinksIngredients();
+      console.log(list);
+      setIngredientsList(list);
     };
     getList();
   }, []);
