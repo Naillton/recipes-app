@@ -9,7 +9,7 @@ import Categories from '../components/Categories';
 
 const doze = 12;
 function Drinks() {
-  const { setPage, data, setData } = useContext(AppContext);
+  const { setPage, data, setData, setRecomendationDrink } = useContext(AppContext);
 
   const history = useHistory();
   useEffect(() => {
@@ -27,7 +27,9 @@ function Drinks() {
 
   useEffect(() => {
     const callData = async () => {
-      setData(await ingredientDrinkName());
+      const drinkArray = await ingredientDrinkName();
+      setRecomendationDrink(drinkArray);
+      setData(drinkArray);
     };
     callData();
   // eslint-disable-next-line react-hooks/exhaustive-deps

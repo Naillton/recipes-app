@@ -1,0 +1,12 @@
+.scroll {
+  display: flex;
+  flex-direction: 'row';
+  height: 250px;
+  overflow: auto;
+  width: 400px;
+}
+
+.buttonStart {
+  bottom: 0;
+  position: fixed;
+}

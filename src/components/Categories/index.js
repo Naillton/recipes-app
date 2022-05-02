@@ -4,21 +4,25 @@ import AppContext from '../../context/AppContext';
 import {
   categoriesListDrink,
   categoryFilterDrink,
-  ingredientDrinkName,
 } from '../../api/drinksAPI';
-import { categoriesList, categoryFilter, nameSearch } from '../../api/foodsAPI';
+import { categoriesList, categoryFilter } from '../../api/foodsAPI';
 
 const cinco = 5;
 
 function Categories() {
   const { page,
-    setData, categories, setCategories, category, setCategory } = useContext(AppContext);
+    setData,
+    categories,
+    setCategories,
+    category,
+    setCategory,
+    recomendationDrink,
+    recomendationFood } = useContext(AppContext);
 
   useEffect(() => {
     if (page === 'Foods') {
       const resultFoodCategories = async () => {
         const apiResult = await categoriesList();
-        console.log(apiResult);
         setCategories(apiResult);
       };
       resultFoodCategories();
@@ -34,11 +38,14 @@ function Categories() {
 
   const handleClick = async (categorie) => {
     if (categorie === category && page === 'Foods') {
-      setData(await nameSearch());
+      // setData(await nameSearch());
+      setCategory('');
+      setData(recomendationFood);
       return;
     }
     if (categorie === category && page === 'Drinks') {
-      setData(await ingredientDrinkName());
+      // const drinksArray = await ingredientDrinkName();
+      setData(recomendationDrink);
       return;
     }
     if (page === 'Foods') {
@@ -52,10 +59,12 @@ function Categories() {
 
   const clearFilter = async () => {
     if (page === 'Foods') {
-      setData(await nameSearch());
+      // setData(await nameSearch());
+      setData(recomendationFood);
       return;
     }
-    setData(await ingredientDrinkName());
+    // setData(await ingredientDrinkName());
+    setData(recomendationDrink);
     setCategory('');
   };
 

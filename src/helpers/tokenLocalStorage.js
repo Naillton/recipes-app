@@ -11,4 +11,23 @@ export const getUser = () => {
   return JSON.parse(localStorage.getItem('user'));
 };
 
+// export const saveFavorite = () => {
+//   localStorage.setItem('favoriteRecipes',
+//     // JSON.stringify({ id: obj.id,
+//     //   type,
+//     //   nationality,
+//     //   category,
+//     //   alcoholicOrNot,
+//     //   name,
+//     //   image })
+//   // );
+// };
+
+export const getFavorite = () => {
+  if (!JSON.parse(localStorage.getItem('favoriteRecipes'))) {
+    localStorage.setItem('user', JSON.stringify([]));
+  }
+  return JSON.parse(localStorage.getItem('favoriteRecipes'));
+};
+
 export const clearStorage = () => localStorage.clear();
