@@ -30,4 +30,11 @@ export const getFavorite = () => {
   return JSON.parse(localStorage.getItem('favoriteRecipes'));
 };
 
+export const getDoneRecipes = () => {
+  if (!JSON.parse(localStorage.getItem('doneRecipes'))) {
+    localStorage.setItem('doneRecipes', JSON.stringify([]));
+  }
+  return JSON.parse(localStorage.getItem('doneRecipes'));
+};
+
 export const clearStorage = () => localStorage.clear();

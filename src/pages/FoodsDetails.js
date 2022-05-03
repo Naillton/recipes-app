@@ -7,19 +7,27 @@ import { getDrinkRecomendation } from '../api/drinksAPI';
 import shareIcon from '../images/shareIcon.svg';
 import './styles.css';
 import RecipeCard from '../components/RecipeCard';
+import { getDoneRecipes } from '../helpers/tokenLocalStorage';
 // import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 // import blackHeartIcon from '../images/blackHeartIcon.svg';
 const six = 6;
 function FoodsDetails(props) {
   const { match: { params: { recipeId } } } = props;
   const [recipe, setRecipe] = useState({});
-  const { recomendationDrink, setRecomendationDrink } = useContext(AppContext);
+  const { recomendationDrink,
+    setRecomendationDrink,
+    doneRecipes, setDoneRecipes } = useContext(AppContext);
 
   const { push } = useHistory();
 
   const getLink = () => {
     Document.execCommand('copy');
     global.alert('Link copied!');
+  };
+
+  const checkButton = (array) => {
+    console.log(array);
+    return array.length === 0 ? true : array.some(({ id }) => id !== recipeId);
   };
 
   useEffect(() => {
@@ -35,6 +43,10 @@ function FoodsDetails(props) {
     };
     food();
   }, []);
+
+  useEffect(() => {
+    setDoneRecipes(getDoneRecipes());
+  }, [setDoneRecipes]);
 
   const recipeKeys = Object.keys(recipe);
   const ingredients = recipeKeys.filter((item) => item.includes('strIngredient'));
@@ -91,14 +103,15 @@ function FoodsDetails(props) {
             </div>
           ))}
       </div>
-      <button
-        type="button"
-        onClick={ () => push(`/foods/${recipeId}/in-progress`) }
-        data-testid="start-recipe-btn"
-        className="buttonStart"
-      >
-        Start Recipe
-      </button>
+      { checkButton(doneRecipes) && (
+        <button
+          type="button"
+          onClick={ () => push(`/foods/${recipeId}/in-progress`) }
+          data-testid="start-recipe-btn"
+          className="buttonStart"
+        >
+          Start Recipe
+        </button>)}
     </div>
   );
 }
