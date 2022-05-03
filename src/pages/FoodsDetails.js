@@ -1,33 +1,72 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
+// import Clipboard from "@react-native-community/clipboard";
 import AppContext from '../context/AppContext';
 import { idSearch } from '../api/foodsAPI';
 import { getDrinkRecomendation } from '../api/drinksAPI';
 import shareIcon from '../images/shareIcon.svg';
 import './styles.css';
 import RecipeCard from '../components/RecipeCard';
-import { getDoneRecipes } from '../helpers/tokenLocalStorage';
-// import whiteHeartIcon from '../images/whiteHeartIcon.svg';
-// import blackHeartIcon from '../images/blackHeartIcon.svg';
+import {
+  getDoneRecipes,
+  getInProgressRecipes,
+  getFavorite,
+  removeFavorite,
+  saveFavorite,
+} from '../helpers/tokenLocalStorage';
+import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import blackHeartIcon from '../images/blackHeartIcon.svg';
+
+const copy = require('clipboard-copy');
+
 const six = 6;
 function FoodsDetails(props) {
   const { match: { params: { recipeId } } } = props;
   const [recipe, setRecipe] = useState({});
+  const [inProgressMeal, setInProgressMeal] = useState({ meals: {}, cocktails: {} });
+  const [isFavorite, setIsFavorite] = useState(false);
   const { recomendationDrink,
     setRecomendationDrink,
     doneRecipes, setDoneRecipes } = useContext(AppContext);
 
-  const { push } = useHistory();
+  const history = useHistory();
+
+  const [linkCopied, setLinkCopied] = useState(false);
 
   const getLink = () => {
-    Document.execCommand('copy');
-    global.alert('Link copied!');
+    copy(window.location.href);
+    setLinkCopied(true);
   };
 
   const checkButton = (array) => {
-    console.log(array);
-    return array.length === 0 ? true : array.some(({ id }) => id !== recipeId);
+    if (array.length === 0) {
+      return true;
+    }
+    array.some(({ id }) => id !== recipeId);
+  };
+
+  const handleHeart = () => {
+    setIsFavorite(!isFavorite);
+  };
+
+  const handleClick = () => {
+    const obj = {
+      id: recipeId,
+      type: 'food',
+      nationality: recipe.strArea,
+      category: recipe.strCategory,
+      alcoholicOrNot: '',
+      name: recipe.strMeal,
+      image: recipe.strMealThumb,
+    };
+    if (isFavorite) {
+      removeFavorite(obj);
+      handleHeart();
+      return;
+    }
+    saveFavorite(obj);
+    handleHeart();
   };
 
   useEffect(() => {
@@ -46,7 +85,16 @@ function FoodsDetails(props) {
 
   useEffect(() => {
     setDoneRecipes(getDoneRecipes());
-  }, [setDoneRecipes]);
+  }, []);
+
+  useEffect(() => {
+    setInProgressMeal(getInProgressRecipes());
+  }, []);
+
+  useEffect(() => {
+    const allFavorites = getFavorite();
+    setIsFavorite(allFavorites.some((item) => item.id === recipeId));
+  }, []);
 
   const recipeKeys = Object.keys(recipe);
   const ingredients = recipeKeys.filter((item) => item.includes('strIngredient'));
@@ -64,7 +112,14 @@ function FoodsDetails(props) {
       >
         <img src={ shareIcon } alt="shareIcon" />
       </button>
-      <button type="button" data-testid="favorite-btn">Favorite</button>
+      {linkCopied && <span>Link copied!</span>}
+      <button type="button" onClick={ handleClick }>
+        <img
+          src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
+          alt="Favorito"
+          data-testid="favorite-btn"
+        />
+      </button>
       <p data-testid="recipe-category">{ recipe.strCategory }</p>
       { ingredients.map((i, index) => (
         <p
@@ -106,11 +161,11 @@ function FoodsDetails(props) {
       { checkButton(doneRecipes) && (
         <button
           type="button"
-          onClick={ () => push(`/foods/${recipeId}/in-progress`) }
+          onClick={ () => history.push(`/foods/${recipeId}/in-progress`) }
           data-testid="start-recipe-btn"
           className="buttonStart"
         >
-          Start Recipe
+          {inProgressMeal.meals[recipeId] ? 'Continue Recipe' : 'Start Recipe'}
         </button>)}
     </div>
   );

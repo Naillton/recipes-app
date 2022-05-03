@@ -7,7 +7,13 @@ import { getFoodRecomendation } from '../api/foodsAPI';
 import shareIcon from '../images/shareIcon.svg';
 import './styles.css';
 import RecipeCard from '../components/RecipeCard';
-import { getDoneRecipes } from '../helpers/tokenLocalStorage';
+import { getDoneRecipes,
+  getInProgressRecipes,
+  removeFavorite, saveFavorite, getFavorite } from '../helpers/tokenLocalStorage';
+import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import blackHeartIcon from '../images/blackHeartIcon.svg';
+
+const copy = require('clipboard-copy');
 
 const six = 6;
 function DrinksRecipes(props) {
@@ -19,14 +25,41 @@ function DrinksRecipes(props) {
 
   const { push } = useHistory();
 
+  const inProgressDrink = getInProgressRecipes();
+  const [linkCopied, setLinkCopied] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(false);
+
   const getLink = () => {
-    Document.execCommand('copy');
-    global.alert('Link copied!');
+    copy(window.location.href);
+    setLinkCopied(true);
   };
 
   const checkButton = (array) => {
     console.log(array);
     return array.length === 0 ? true : array.some(({ id }) => id !== recipeId);
+  };
+
+  const handleHeart = () => {
+    setIsFavorite(!isFavorite);
+  };
+
+  const handleClick = () => {
+    const obj = {
+      id: recipeId,
+      type: 'drink',
+      nationality: '',
+      category: recipe.strCategory,
+      alcoholicOrNot: recipe.strAlcoholic,
+      name: recipe.strDrink,
+      image: recipe.strDrinkThumb,
+    };
+    if (isFavorite) {
+      removeFavorite(obj);
+      handleHeart();
+      return;
+    }
+    saveFavorite(obj);
+    handleHeart();
   };
 
   useEffect(() => {
@@ -47,6 +80,11 @@ function DrinksRecipes(props) {
     drink();
   }, []);
 
+  useEffect(() => {
+    const allFavorites = getFavorite();
+    setIsFavorite(allFavorites.some((item) => item.id === recipeId));
+  }, []);
+
   const recipeKeys = Object.keys(recipe);
   const ingredients = recipeKeys.filter((item) => item.includes('strIngredient'));
   const measure = recipeKeys.filter((item) => item.includes('strMeasure'));
@@ -63,7 +101,14 @@ function DrinksRecipes(props) {
       >
         <img src={ shareIcon } alt="shareIcon" />
       </button>
-      <button type="button" data-testid="favorite-btn">Favorite</button>
+      {linkCopied && <span>Link copied!</span>}
+      <button type="button" onClick={ handleClick }>
+        <img
+          src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
+          alt="Favorito"
+          data-testid="favorite-btn"
+        />
+      </button>
       <p
         data-testid="recipe-category"
       >
@@ -111,7 +156,7 @@ function DrinksRecipes(props) {
           data-testid="start-recipe-btn"
           className="buttonStart"
         >
-          Start Recipe
+          {inProgressDrink.cocktails[recipeId] ? 'Continue Recipe' : 'Start Recipe'}
         </button>)}
     </div>
   );
