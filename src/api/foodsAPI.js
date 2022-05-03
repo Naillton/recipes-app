@@ -72,10 +72,10 @@ export const firstLetterSearch = async (firstLetter) => {
 
 // Pesquisa por ID
 export const idSearch = async (id) => {
-  const endpoint = `www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
+  const endpoint = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
   const response = await fetch(endpoint);
-  const data = await response.json();
-  return data;
+  const { meals } = await response.json();
+  return meals[0];
 };
 
 // Imagens
@@ -89,6 +89,13 @@ export const imageIngredient = async (ingredient) => {
 // Comidas aleatórias
 export const foodRandom = async () => {
   const endpoint = 'https://www.themealdb.com/api/json/v1/1/random.php';
+  const response = await fetch(endpoint);
+  const { meals } = await response.json();
+  return meals;
+};
+
+export const getFoodRecomendation = async () => {
+  const endpoint = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
   const response = await fetch(endpoint);
   const { meals } = await response.json();
   return meals;

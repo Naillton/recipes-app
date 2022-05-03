@@ -47,3 +47,17 @@ export const drinksIngredients = async () => {
   const { drinks } = await response.json();
   return drinks;
 };
+export const getDrinkRecomendation = async () => {
+  const endpoint = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
+  const response = await fetch(endpoint);
+  const { drinks } = await response.json();
+  return drinks;
+};
+
+// Pesquisa por ID
+export const idSearch = async (id) => {
+  const endpoint = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
+  const response = await fetch(endpoint);
+  const { drinks } = await response.json();
+  return drinks[0];
+};

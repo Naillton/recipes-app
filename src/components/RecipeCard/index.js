@@ -12,6 +12,7 @@ function RecipeCard({ index, img, name, ingredient }) {
     >
       <img src={ img } data-testid={ `${index}-card-img` } alt={ name } />
       <p data-testid={ `${index}-card-name` }>{name}</p>
+      <p data-testid={ `${index}-recomendation-title` }>{name}</p>
     </div>
   );
 }
