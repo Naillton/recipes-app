@@ -1,8 +1,8 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import AppContext from '../context/AppContext';
-import { idSearch, getDrinkRecomendation } from '../api/drinksAPI';
+import { idSearch } from '../api/drinksAPI';
+import { getFoodRecomendation } from '../api/foodsAPI';
 import shareIcon from '../images/shareIcon.svg';
 import './styles.css';
 import RecipeCard from '../components/RecipeCard';
@@ -12,7 +12,8 @@ function DrinksRecipes(props) {
   // getDrinkRecomendation
   const { match: { params: { recipeId } } } = props;
   const [recipe, setRecipe] = useState({});
-  const { recomendationDrink, setRecomendationDrink } = useContext(AppContext);
+  // const { recomendationDrink, setRecomendationDrink } = useContext(AppContext);
+  const [recomendationFood, setRecomendationFood] = useState([]);
 
   const { push } = useHistory();
 
@@ -30,10 +31,10 @@ function DrinksRecipes(props) {
 
   useEffect(() => {
     const drink = async () => {
-      setRecomendationDrink(await getDrinkRecomendation());
+      setRecomendationFood(await getFoodRecomendation());
     };
     drink();
-  }, [setRecomendationDrink]);
+  }, []);
 
   const recipeKeys = Object.keys(recipe);
   const ingredients = recipeKeys.filter((item) => item.includes('strIngredient'));
@@ -77,16 +78,16 @@ function DrinksRecipes(props) {
         src={ `https://www.youtube.com/embed/${recepiYTLink}` }
       />
       <div className="scroll">
-        {recomendationDrink && recomendationDrink.filter((r, i) => i < six)
+        {recomendationFood.length !== 0 && recomendationFood.filter((r, i) => i < six)
           .map((recomendation, index) => (
             <div
               data-testid={ `${index}-recomendation-card` }
               key={ index }
             >
               <RecipeCard
-                name={ recomendation.strDrink }
+                name={ recomendation.strMeal }
                 index={ index }
-                img={ `${recomendation.strDrinkThumb}/preview` }
+                img={ `${recomendation.strMealThumb}/preview` }
                 ingredient={ false }
               />
             </div>
