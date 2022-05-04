@@ -14,6 +14,7 @@ function AppProvider({ children }) {
   const [recomendationDrink, setRecomendationDrink] = useState([]);
   const [recomendationFood, setRecomendationFood] = useState([]);
   const [doneRecipes, setDoneRecipes] = useState([]);
+  const [ingredientChosen, setIngredientChosen] = useState('');
 
   const handleFoods = async (input, radio) => {
     if (radio === 'ingredientSearch') {
@@ -70,6 +71,8 @@ function AppProvider({ children }) {
         setRecomendationFood,
         doneRecipes,
         setDoneRecipes,
+        ingredientChosen,
+        setIngredientChosen,
       } }
     >
       { children }

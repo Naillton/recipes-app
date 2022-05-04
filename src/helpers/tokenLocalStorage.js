@@ -45,4 +45,24 @@ export const getInProgressRecipes = () => {
   return JSON.parse(localStorage.getItem('inProgressRecipes'));
 };
 
+export const updateInProgressRecipes = (obj, type) => {
+  const previousRecipes = getInProgressRecipes;
+  if (type === 'food') {
+    localStorage.setItem('inProgressRecipes', JSON.stringify(
+      { ...previousRecipes,
+        meals: {
+          ...previousRecipes.meals,
+          [obj.id]: obj.ingredients,
+        } },
+    ));
+  }
+  localStorage.setItem('inProgressRecipes', JSON.stringify(
+    { ...previousRecipes,
+      cocktails: {
+        ...previousRecipes.cocktails,
+        [obj.id]: obj.ingredients,
+      } },
+  ));
+};
+
 export const clearStorage = () => localStorage.clear();

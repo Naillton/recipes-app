@@ -6,7 +6,13 @@
   width: 200px;
 }
 
-.buttonStart {
+.buttonStart, .buttonFinish {
   bottom: 0;
   position: fixed;
 }
+
+.checkbox {
+  text-decoration: line-through;
+}
+
+/* none solid black; */
