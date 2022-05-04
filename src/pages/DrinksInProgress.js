@@ -12,7 +12,6 @@ import blackHeartIcon from '../images/blackHeartIcon.svg';
 const copy = require('clipboard-copy');
 
 function DrinksInProgress(props) {
-  // getDrinkRecomendation
   const { match: { params: { recipeId } } } = props;
   const [recipe, setRecipe] = useState({});
 
@@ -20,17 +19,13 @@ function DrinksInProgress(props) {
 
   const [linkCopied, setLinkCopied] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
-  // const [isDisable, setIsDisable] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(true);
 
   const [checkedIndex, setCheckedIndex] = useState([]);
 
   const getLink = () => {
     copy(window.location.href);
     setLinkCopied(true);
-  };
-
-  const checkButton = () => {
-    // todos os checkbox devem estar checked
   };
 
   const handleHeart = () => {
@@ -56,19 +51,6 @@ function DrinksInProgress(props) {
     handleHeart();
   };
 
-  const checkIngredients = (target) => {
-    setCheckedIndex((prev) => [...prev, target.name]);
-    // const check = target;
-    // check.className = 'checkbox';
-    // console.log(target);
-    // const checked = ingredients.every((item) => item.includes(target.name));
-    // if (checked) {
-    //   setIsDisabled(true);
-    // } else {
-    //   setIsDisabled(false);
-    // }
-  };
-
   useEffect(() => {
     const getRecipe = async () => {
       setRecipe(await idSearch(recipeId));
@@ -79,11 +61,23 @@ function DrinksInProgress(props) {
   useEffect(() => {
     const allFavorites = getFavorite();
     setIsFavorite(allFavorites.some((item) => item.id === recipeId));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const recipeKeys = Object.keys(recipe);
   const ingredients = recipeKeys.filter((item) => item.includes('strIngredient'));
   const measure = recipeKeys.filter((item) => item.includes('strMeasure'));
+
+  useEffect(() => {
+    const allIngredients = ingredients.filter((item) => recipe[item]
+      !== null && recipe[item] !== '');
+    console.log(checkedIndex);
+    if (allIngredients.length > 0 && allIngredients.length === checkedIndex.length) {
+      return setIsDisabled(false);
+    }
+    return setIsDisabled(true);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [checkedIndex]);
 
   return (
     <div>
@@ -111,34 +105,41 @@ function DrinksInProgress(props) {
       </p>
       { ingredients.filter((item) => recipe[item] !== null && recipe[item] !== '')
         .map((i, index) => (
-          <label key={ index } htmlFor={ `ingredient-${index}` }>
+          <label
+            key={ index }
+            data-testid={ `${index}-ingredient-step` }
+            htmlFor={ `ingredient-${index}` }
+          >
             <input
               type="checkbox"
               id={ `ingredient-${index}` }
               name={ index }
-              data-testid={ `${index}-ingredient-step` }
-              onClick={ ({ target }) => checkIngredients(target) }
+              onClick={ ({ target }) => {
+                if (checkedIndex.includes(`${index}`)) {
+                  setCheckedIndex(checkedIndex.filter((e) => +e !== index));
+                  return;
+                }
+                setCheckedIndex([...checkedIndex, target.name]);
+              } }
             />
             <span
               key={ index }
-              className={ checkedIndex.some((item) => item === index) ? 'checkbox' : '' }
-              // id="ingradient"
+              className={ checkedIndex.some((item) => +item === index) ? 'checkbox' : '' }
             >
               { recipe[i] !== '' && `${recipe[measure[index]]} ${recipe[i]}` }
             </span>
           </label>
         ))}
       <p data-testid="instructions">{ recipe.strInstructions }</p>
-      { checkButton() && (
-        <button
-          type="button"
-          onClick={ () => push('/done-recipes') }
-          data-testid="finish-recipe-btn"
-          className="buttonFinish"
-          disabled={ isDisable }
-        >
-          Finish recipe
-        </button>)}
+      <button
+        type="button"
+        onClick={ () => push('/done-recipes') }
+        data-testid="finish-recipe-btn"
+        className="buttonFinish"
+        disabled={ isDisabled }
+      >
+        Finish recipe
+      </button>
     </div>
   );
 }

@@ -1,12 +1,12 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import AppContext from '../context/AppContext';
+// import AppContext from '../context/AppContext';
 import { idSearch } from '../api/foodsAPI';
 import shareIcon from '../images/shareIcon.svg';
 import './styles.css';
 import {
-  getDoneRecipes,
+  // getDoneRecipes, , useContext
   getFavorite,
   removeFavorite,
   saveFavorite,
@@ -20,22 +20,17 @@ function FoodInProgress(props) {
   const { match: { params: { recipeId } } } = props;
   const [recipe, setRecipe] = useState({});
   const [isFavorite, setIsFavorite] = useState(false);
-  const { doneRecipes, setDoneRecipes } = useContext(AppContext);
+  // const { doneRecipes, setDoneRecipes } = useContext(AppContext);
 
   const history = useHistory();
 
   const [linkCopied, setLinkCopied] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(true);
+  const [checkedIndex, setCheckedIndex] = useState([]);
 
   const getLink = () => {
     copy(window.location.href);
     setLinkCopied(true);
-  };
-
-  const checkButton = (array) => {
-    if (array.length === 0) {
-      return true;
-    }
-    array.some(({ id }) => id !== recipeId);
   };
 
   const handleHeart = () => {
@@ -68,9 +63,9 @@ function FoodInProgress(props) {
     getRecipe();
   }, [recipeId]);
 
-  useEffect(() => {
-    setDoneRecipes(getDoneRecipes());
-  }, []);
+  // useEffect(() => {
+  //   setDoneRecipes(getDoneRecipes());
+  // }, []);
 
   useEffect(() => {
     const allFavorites = getFavorite();
@@ -80,7 +75,16 @@ function FoodInProgress(props) {
   const recipeKeys = Object.keys(recipe);
   const ingredients = recipeKeys.filter((item) => item.includes('strIngredient'));
   const measure = recipeKeys.filter((item) => item.includes('strMeasure'));
+  useEffect(() => {
+    const allIngredients = ingredients.filter((item) => recipe[item]
+      !== null && recipe[item] !== '');
 
+    if (allIngredients.length > 0 && allIngredients.length === checkedIndex.length) {
+      return setIsDisabled(false);
+    }
+    return setIsDisabled(true);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [checkedIndex]);
   return (
     <div>
       <h1 data-testid="recipe-title">{ recipe.strMeal }</h1>
@@ -103,12 +107,26 @@ function FoodInProgress(props) {
       <p data-testid="recipe-category">{ recipe.strCategory }</p>
       { ingredients.filter((item) => recipe[item] !== null && recipe[item] !== '')
         .map((i, index) => (
-          <label key={ index } htmlFor={ `ingredient-${index}` } className="checkbox">
-            <input type="checkbox" id={ `ingredient-${index}` } />
+          <label
+            key={ index }
+            htmlFor={ `ingredient-${index}` }
+            data-testid={ `${index}-ingredient-step` }
+          >
+            <input
+              type="checkbox"
+              id={ `ingredient-${index}` }
+              name={ index }
+              onClick={ ({ target }) => {
+                if (checkedIndex.includes(`${index}`)) {
+                  setCheckedIndex(checkedIndex.filter((e) => +e !== index));
+                  return;
+                }
+                setCheckedIndex([...checkedIndex, target.name]);
+              } }
+            />
             <span
               key={ index }
-              data-testid={ `${index}-ingredient-name-and-measure` }
-              // className="checkbox"
+              className={ checkedIndex.some((item) => +item === index) ? 'checkbox' : '' }
             >
               { `${recipe[measure[index]]} ${recipe[i]}` }
             </span>
@@ -116,15 +134,15 @@ function FoodInProgress(props) {
         ))}
       <p data-testid="instructions">{ recipe.strInstructions }</p>
       <p>Details</p>
-      { checkButton(doneRecipes) && (
-        <button
-          type="button"
-          onClick={ () => history.push('/done-recipes') }
-          data-testid="start-recipe-btn"
-          className="buttonStart"
-        >
-          Finish recipe
-        </button>)}
+      <button
+        type="button"
+        onClick={ () => history.push('/done-recipes') }
+        data-testid="finish-recipe-btn"
+        className="buttonFinish"
+        disabled={ isDisabled }
+      >
+        Finish recipe
+      </button>
     </div>
   );
 }
