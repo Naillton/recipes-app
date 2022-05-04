@@ -43,7 +43,7 @@ function FoodsDetails(props) {
     if (array.length === 0) {
       return true;
     }
-    array.some(({ id }) => id !== recipeId);
+    return array.some(({ id }) => id !== recipeId);
   };
 
   const handleHeart = () => {
@@ -100,6 +100,8 @@ function FoodsDetails(props) {
   const ingredients = recipeKeys.filter((item) => item.includes('strIngredient'));
   const measure = recipeKeys.filter((item) => item.includes('strMeasure'));
   const recepiYTLink = recipe.strYoutube && recipe.strYoutube.split('=')[1];
+
+  console.log(doneRecipes);
 
   return (
     <div>

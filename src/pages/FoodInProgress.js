@@ -6,10 +6,11 @@ import { idSearch } from '../api/foodsAPI';
 import shareIcon from '../images/shareIcon.svg';
 import './styles.css';
 import {
-  // getDoneRecipes, , useContext
   getFavorite,
   removeFavorite,
   saveFavorite,
+  updateInProgressRecipes,
+  saveDoneRecipes,
 } from '../helpers/tokenLocalStorage';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
@@ -22,8 +23,7 @@ function FoodInProgress(props) {
   const { match: { params: { recipeId } } } = props;
   const [recipe, setRecipe] = useState({});
   const [isFavorite, setIsFavorite] = useState(false);
-  // const { doneRecipes, setDoneRecipes } = useContext(AppContext);
-
+  const [usedIngredients, setUsedIngredients] = useState([]);
   const history = useHistory();
 
   const [linkCopied, setLinkCopied] = useState(false);
@@ -39,6 +39,31 @@ function FoodInProgress(props) {
 
   const handleHeart = () => {
     setIsFavorite(!isFavorite);
+  };
+
+  const finishRecipe = () => {
+    const date = new Date();
+    const dateNow = date.toLocaleDateString();
+    const tagsList = recipe.strTags.split(',');
+    const done = {
+      id: recipeId,
+      type: 'food',
+      nationality: recipe.strArea,
+      category: recipe.strCategory,
+      alcoholicOrNot: '',
+      name: recipe.strMeal,
+      image: recipe.strMealThumb,
+      doneDate: dateNow,
+      tags: tagsList,
+    };
+
+    saveDoneRecipes(done);
+    history.push('/done-recipes');
+  };
+
+  const handleCheckBox = () => {
+    const obj = { id: recipeId, ingredients: usedIngredients };
+    updateInProgressRecipes(obj, 'food');
   };
 
   const handleClick = () => {
@@ -123,9 +148,13 @@ function FoodInProgress(props) {
               onClick={ ({ target }) => {
                 if (checkedIndex.includes(`${index}`)) {
                   setCheckedIndex(checkedIndex.filter((e) => +e !== index));
+                  setUsedIngredients(usedIngredients.filter((itm) => itm !== recipe[i]));
+                  handleCheckBox();
                   return;
                 }
                 setCheckedIndex([...checkedIndex, target.name]);
+                setUsedIngredients([...usedIngredients, recipe[i]]);
+                handleCheckBox();
               } }
             />
             <span
@@ -140,7 +169,7 @@ function FoodInProgress(props) {
       <p>Details</p>
       <button
         type="button"
-        onClick={ () => history.push('/done-recipes') }
+        onClick={ finishRecipe }
         data-testid="finish-recipe-btn"
         className="buttonFinish"
         disabled={ isDisabled }
