@@ -4,13 +4,15 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import AppContext from '../context/AppContext';
 import RecipeCard from '../components/RecipeCard';
-import { nameSearch } from '../api/foodsAPI';
+import { ingredientsSearch, nameSearch } from '../api/foodsAPI';
 import Categories from '../components/Categories';
 
 const doze = 12;
 function Foods() {
-  const { setPage,
-    setData, data, category, setRecomendationFood } = useContext(AppContext);
+  const {
+    setPage, setData, data, category,
+    setRecomendationFood, ingredientChosen, setIngredientChosen,
+  } = useContext(AppContext);
 
   const history = useHistory();
 
@@ -20,6 +22,12 @@ function Foods() {
 
   useEffect(() => {
     const callData = async () => {
+      if (ingredientChosen !== '') {
+        const foodAPI = await ingredientsSearch(ingredientChosen);
+        setData(foodAPI);
+        setIngredientChosen('');
+        return;
+      }
       const foodArray = await nameSearch();
       setRecomendationFood(foodArray);
       setData(foodArray);

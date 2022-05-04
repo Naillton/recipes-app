@@ -17,7 +17,6 @@ function FoodsNacionalities() {
     const getNationaties = async () => {
       const nationalities = await nationalitiesList();
       setSaveNationalities(nationalities.meals.map((e) => (e.strArea)));
-      console.log(nationalities.meals);
     };
     const getMeals = async () => {
       const allMeals = await nameSearch();

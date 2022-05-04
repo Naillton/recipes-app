@@ -1,22 +1,31 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { drinksIngredients } from '../api/drinksAPI';
 import Header from '../components/Header';
 import RecipeCard from '../components/RecipeCard';
 import Footer from '../components/Footer';
+import AppContext from '../context/AppContext';
 
 function ExploreDrinksIngredients() {
+  const { setIngredientChosen } = useContext(AppContext);
+
   const [ingredientsList, setIngredientsList] = useState([]);
   const doze = 12;
+
+  const { push } = useHistory();
 
   useEffect(() => {
     const getList = async () => {
       const list = await drinksIngredients();
-      console.log(list);
       setIngredientsList(list);
     };
     getList();
   }, []);
+
+  const redirectClick = async (name) => {
+    setIngredientChosen(name);
+    push('/drinks');
+  };
 
   return (
     <div>
@@ -24,7 +33,11 @@ function ExploreDrinksIngredients() {
       {
         ingredientsList && ingredientsList
           .filter((f, i) => i < doze).map((drink, index) => (
-            <Link to="/drinks" key={ index }>
+            <button
+              type="button"
+              key={ index }
+              onClick={ () => redirectClick(drink.strIngredient1) }
+            >
               <RecipeCard
                 index={ index }
                 name={ drink.strIngredient1 }
@@ -32,7 +45,7 @@ function ExploreDrinksIngredients() {
                 key={ index }
                 ingredient="ingredient"
               />
-            </Link>))
+            </button>))
       }
       <Footer />
     </div>
