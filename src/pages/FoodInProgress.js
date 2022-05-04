@@ -16,6 +16,8 @@ import blackHeartIcon from '../images/blackHeartIcon.svg';
 
 const copy = require('clipboard-copy');
 
+const five = 5;
+
 function FoodInProgress(props) {
   const { match: { params: { recipeId } } } = props;
   const [recipe, setRecipe] = useState({});
@@ -29,7 +31,9 @@ function FoodInProgress(props) {
   const [checkedIndex, setCheckedIndex] = useState([]);
 
   const getLink = () => {
-    copy(window.location.href);
+    const string = window.location.href;
+    const URL = string.split('/').splice(0, five).join('/');
+    copy(URL);
     setLinkCopied(true);
   };
 
