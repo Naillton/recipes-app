@@ -9,11 +9,10 @@ import {
   getFavorite,
   removeFavorite,
   saveFavorite,
-  updateInProgressRecipes,
-  saveDoneRecipes,
 } from '../helpers/tokenLocalStorage';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
+import treatRecipe from '../helpers/treatingDataForLocal';
 
 const copy = require('clipboard-copy');
 
@@ -23,7 +22,6 @@ function FoodInProgress(props) {
   const { match: { params: { recipeId } } } = props;
   const [recipe, setRecipe] = useState({});
   const [isFavorite, setIsFavorite] = useState(false);
-  const [usedIngredients, setUsedIngredients] = useState([]);
   const history = useHistory();
 
   const [linkCopied, setLinkCopied] = useState(false);
@@ -42,28 +40,14 @@ function FoodInProgress(props) {
   };
 
   const finishRecipe = () => {
-    const date = new Date();
-    const dateNow = date.toLocaleDateString();
-    const tagsList = recipe.strTags.split(',');
-    const done = {
-      id: recipeId,
-      type: 'food',
-      nationality: recipe.strArea,
-      category: recipe.strCategory,
-      alcoholicOrNot: '',
-      name: recipe.strMeal,
-      image: recipe.strMealThumb,
-      doneDate: dateNow,
-      tags: tagsList,
-    };
-
-    saveDoneRecipes(done);
+    treatRecipe(recipeId, recipe, 'food');
     history.push('/done-recipes');
   };
 
   const handleCheckBox = () => {
-    const obj = { id: recipeId, ingredients: usedIngredients };
-    updateInProgressRecipes(obj, 'food');
+    const obj = { id: recipeId, ingredients: checkedIndex };
+    console.log(obj);
+    // updateInProgressRecipes(obj, 'food');
   };
 
   const handleClick = () => {
@@ -91,10 +75,6 @@ function FoodInProgress(props) {
     };
     getRecipe();
   }, [recipeId]);
-
-  // useEffect(() => {
-  //   setDoneRecipes(getDoneRecipes());
-  // }, []);
 
   useEffect(() => {
     const allFavorites = getFavorite();
@@ -148,12 +128,10 @@ function FoodInProgress(props) {
               onClick={ ({ target }) => {
                 if (checkedIndex.includes(`${index}`)) {
                   setCheckedIndex(checkedIndex.filter((e) => +e !== index));
-                  setUsedIngredients(usedIngredients.filter((itm) => itm !== recipe[i]));
                   handleCheckBox();
                   return;
                 }
                 setCheckedIndex([...checkedIndex, target.name]);
-                setUsedIngredients([...usedIngredients, recipe[i]]);
                 handleCheckBox();
               } }
             />

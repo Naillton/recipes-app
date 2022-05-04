@@ -22,10 +22,10 @@ function DrinksRecipes(props) {
   const [recipe, setRecipe] = useState({});
   const { doneRecipes, setDoneRecipes } = useContext(AppContext);
   const [recomendationFood, setRecomendationFood] = useState([]);
+  const [inProgressDrink, setInProgressDrink] = useState({ meals: {}, cocktails: {} });
 
   const { push } = useHistory();
 
-  const inProgressDrink = getInProgressRecipes();
   const [linkCopied, setLinkCopied] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
 
@@ -78,6 +78,10 @@ function DrinksRecipes(props) {
       setRecomendationFood(await getFoodRecomendation());
     };
     drink();
+  }, []);
+
+  useEffect(() => {
+    setInProgressDrink(getInProgressRecipes());
   }, []);
 
   useEffect(() => {
@@ -156,7 +160,8 @@ function DrinksRecipes(props) {
           data-testid="start-recipe-btn"
           className="buttonStart"
         >
-          {inProgressDrink.cocktails[recipeId] ? 'Continue Recipe' : 'Start Recipe'}
+          {inProgressDrink && inProgressDrink.cocktails[recipeId] ? 'Continue Recipe'
+            : 'Start Recipe'}
         </button>)}
     </div>
   );

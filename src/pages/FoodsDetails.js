@@ -101,8 +101,6 @@ function FoodsDetails(props) {
   const measure = recipeKeys.filter((item) => item.includes('strMeasure'));
   const recepiYTLink = recipe.strYoutube && recipe.strYoutube.split('=')[1];
 
-  console.log(doneRecipes);
-
   return (
     <div>
       <h1 data-testid="recipe-title">{ recipe.strMeal }</h1>
@@ -167,7 +165,8 @@ function FoodsDetails(props) {
           data-testid="start-recipe-btn"
           className="buttonStart"
         >
-          {inProgressMeal.meals[recipeId] ? 'Continue Recipe' : 'Start Recipe'}
+          {inProgressMeal && inProgressMeal.meals[recipeId] ? 'Continue Recipe'
+            : 'Start Recipe'}
         </button>)}
     </div>
   );
