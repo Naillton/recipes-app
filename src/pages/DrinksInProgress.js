@@ -5,14 +5,17 @@ import { idSearch } from '../api/drinksAPI';
 import shareIcon from '../images/shareIcon.svg';
 import './styles.css';
 import {
-  removeFavorite, saveFavorite, getFavorite } from '../helpers/tokenLocalStorage';
+  removeFavorite,
+  saveFavorite,
+  getFavorite,
+} from '../helpers/tokenLocalStorage';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
+import treatRecipe from '../helpers/treatingDataForLocal';
 
 const copy = require('clipboard-copy');
 
 const five = 5;
-
 function DrinksInProgress(props) {
   const { match: { params: { recipeId } } } = props;
   const [recipe, setRecipe] = useState({});
@@ -24,6 +27,7 @@ function DrinksInProgress(props) {
   const [isDisabled, setIsDisabled] = useState(true);
 
   const [checkedIndex, setCheckedIndex] = useState([]);
+  // const [usedIngredients, setUsedIngredients] = useState([]);
 
   const getLink = () => {
     const string = window.location.href;
@@ -34,6 +38,11 @@ function DrinksInProgress(props) {
 
   const handleHeart = () => {
     setIsFavorite(!isFavorite);
+  };
+
+  const finishRecipe = () => {
+    treatRecipe(recipeId, recipe, 'drink');
+    push('/done-recipes');
   };
 
   const handleClick = () => {
@@ -53,6 +62,12 @@ function DrinksInProgress(props) {
     }
     saveFavorite(obj);
     handleHeart();
+  };
+
+  const handleCheckBox = () => {
+    const obj = { id: recipeId, ingredients: checkedIndex };
+    console.log(obj);
+    // updateInProgressRecipes(obj, 'drinks');
   };
 
   useEffect(() => {
@@ -75,8 +90,7 @@ function DrinksInProgress(props) {
   useEffect(() => {
     const allIngredients = ingredients.filter((item) => recipe[item]
       !== null && recipe[item] !== '');
-    console.log(checkedIndex);
-    if (allIngredients.length > 0 && allIngredients.length === checkedIndex.length) {
+    if (allIngredients.length === checkedIndex.length) {
       return setIsDisabled(false);
     }
     return setIsDisabled(true);
@@ -121,9 +135,11 @@ function DrinksInProgress(props) {
               onClick={ ({ target }) => {
                 if (checkedIndex.includes(`${index}`)) {
                   setCheckedIndex(checkedIndex.filter((e) => +e !== index));
+                  handleCheckBox();
                   return;
                 }
                 setCheckedIndex([...checkedIndex, target.name]);
+                handleCheckBox();
               } }
             />
             <span
@@ -137,7 +153,7 @@ function DrinksInProgress(props) {
       <p data-testid="instructions">{ recipe.strInstructions }</p>
       <button
         type="button"
-        onClick={ () => push('/done-recipes') }
+        onClick={ finishRecipe }
         data-testid="finish-recipe-btn"
         className="buttonFinish"
         disabled={ isDisabled }

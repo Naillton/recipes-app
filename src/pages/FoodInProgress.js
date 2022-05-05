@@ -6,13 +6,13 @@ import { idSearch } from '../api/foodsAPI';
 import shareIcon from '../images/shareIcon.svg';
 import './styles.css';
 import {
-  // getDoneRecipes, , useContext
   getFavorite,
   removeFavorite,
   saveFavorite,
 } from '../helpers/tokenLocalStorage';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
+import treatRecipe from '../helpers/treatingDataForLocal';
 
 const copy = require('clipboard-copy');
 
@@ -22,8 +22,6 @@ function FoodInProgress(props) {
   const { match: { params: { recipeId } } } = props;
   const [recipe, setRecipe] = useState({});
   const [isFavorite, setIsFavorite] = useState(false);
-  // const { doneRecipes, setDoneRecipes } = useContext(AppContext);
-
   const history = useHistory();
 
   const [linkCopied, setLinkCopied] = useState(false);
@@ -39,6 +37,17 @@ function FoodInProgress(props) {
 
   const handleHeart = () => {
     setIsFavorite(!isFavorite);
+  };
+
+  const finishRecipe = () => {
+    treatRecipe(recipeId, recipe, 'food');
+    history.push('/done-recipes');
+  };
+
+  const handleCheckBox = () => {
+    const obj = { id: recipeId, ingredients: checkedIndex };
+    console.log(obj);
+    // updateInProgressRecipes(obj, 'food');
   };
 
   const handleClick = () => {
@@ -66,10 +75,6 @@ function FoodInProgress(props) {
     };
     getRecipe();
   }, [recipeId]);
-
-  // useEffect(() => {
-  //   setDoneRecipes(getDoneRecipes());
-  // }, []);
 
   useEffect(() => {
     const allFavorites = getFavorite();
@@ -123,9 +128,11 @@ function FoodInProgress(props) {
               onClick={ ({ target }) => {
                 if (checkedIndex.includes(`${index}`)) {
                   setCheckedIndex(checkedIndex.filter((e) => +e !== index));
+                  handleCheckBox();
                   return;
                 }
                 setCheckedIndex([...checkedIndex, target.name]);
+                handleCheckBox();
               } }
             />
             <span
@@ -140,7 +147,7 @@ function FoodInProgress(props) {
       <p>Details</p>
       <button
         type="button"
-        onClick={ () => history.push('/done-recipes') }
+        onClick={ finishRecipe }
         data-testid="finish-recipe-btn"
         className="buttonFinish"
         disabled={ isDisabled }

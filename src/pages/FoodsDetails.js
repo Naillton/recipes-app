@@ -43,7 +43,7 @@ function FoodsDetails(props) {
     if (array.length === 0) {
       return true;
     }
-    array.some(({ id }) => id !== recipeId);
+    return array.some(({ id }) => id !== recipeId);
   };
 
   const handleHeart = () => {
@@ -93,7 +93,8 @@ function FoodsDetails(props) {
 
   useEffect(() => {
     const allFavorites = getFavorite();
-    setIsFavorite(allFavorites.some((item) => item.id === recipeId));
+    setIsFavorite(allFavorites
+      .filter((e) => e !== null).some((item) => item.id === recipeId));
   }, []);
 
   const recipeKeys = Object.keys(recipe);
@@ -165,7 +166,8 @@ function FoodsDetails(props) {
           data-testid="start-recipe-btn"
           className="buttonStart"
         >
-          {inProgressMeal.meals[recipeId] ? 'Continue Recipe' : 'Start Recipe'}
+          {inProgressMeal && inProgressMeal.meals[recipeId] ? 'Continue Recipe'
+            : 'Start Recipe'}
         </button>)}
     </div>
   );
