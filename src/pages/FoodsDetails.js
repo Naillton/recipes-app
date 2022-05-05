@@ -93,7 +93,8 @@ function FoodsDetails(props) {
 
   useEffect(() => {
     const allFavorites = getFavorite();
-    setIsFavorite(allFavorites.some((item) => item.id === recipeId));
+    setIsFavorite(allFavorites
+      .filter((e) => e !== null).some((item) => item.id === recipeId));
   }, []);
 
   const recipeKeys = Object.keys(recipe);

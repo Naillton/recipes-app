@@ -1,24 +1,59 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import shareIcon from '../../images/shareIcon.svg';
+import blackHeartIcon from '../../images/blackHeartIcon.svg';
+import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
+
+import {
+  getFavorite, removeFavorite, saveFavorite,
+} from '../../helpers/tokenLocalStorage';
 
 const copy = require('clipboard-copy');
 
-function DoneRecipesCard({ recipe, index }) {
-  const { id,
-    type,
-    image, category, name, doneDate, tags, nationality, alcoholicOrNot } = recipe;
+function DoneRecipesCard({ recipe, index, showHeart }) {
+  const {
+    id, type, image, category, name,
+    doneDate, tags, nationality, alcoholicOrNot } = recipe;
+
   const [linkCopied, setLinkCopied] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(false);
+
   const url = `http://localhost:3000/${type}s/${id}`;
 
-  console.log(tags);
   const getLink = () => {
     copy(url);
     setLinkCopied(true);
   };
 
-  return (
+  useEffect(() => {
+    const allFavorites = getFavorite();
+    setIsFavorite(allFavorites.some((item) => item.id === id));
+  }, [id]);
 
+  const handleHeart = () => {
+    setIsFavorite(!isFavorite);
+  };
+
+  const handleFavorite = () => {
+    const obj = {
+      id,
+      type,
+      nationality,
+      category,
+      alcoholicOrNot,
+      name,
+      image,
+    };
+    if (isFavorite) {
+      removeFavorite(obj);
+      handleHeart();
+      return;
+    }
+    saveFavorite(obj);
+    handleHeart();
+  };
+
+  return (
     <div>
       <a href={ url }>
         <img
@@ -50,10 +85,19 @@ function DoneRecipesCard({ recipe, index }) {
         />
       </button>
       {linkCopied && <span>Link copied!</span>}
-
       {tags && tags.filter((i, r) => r < 2).map((tag, i) => (
         <span data-testid={ `${index}-${tag}-horizontal-tag` } key={ i }>{tag}</span>
       ))}
+      {
+        showHeart && (
+          <button type="button" onClick={ handleFavorite }>
+            <img
+              src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
+              alt="FavoriteIcon"
+              data-testid={ `${index}-horizontal-favorite-btn` }
+            />
+          </button>)
+      }
     </div>
   );
 }

@@ -20,7 +20,8 @@ export const getFavorite = () => {
 
 export const removeFavorite = (obj) => {
   const readFavorites = getFavorite();
-  const newFavorites = readFavorites.filter((fav) => fav.id !== obj.id);
+  const newFavorites = readFavorites
+    .filter((e) => e !== null).filter((fav) => fav.id !== obj.id);
   localStorage.setItem('favoriteRecipes', JSON.stringify(newFavorites));
 };
 
