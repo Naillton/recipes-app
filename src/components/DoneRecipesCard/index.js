@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import shareIcon from '../../images/shareIcon.svg';
 import blackHeartIcon from '../../images/blackHeartIcon.svg';
@@ -7,6 +7,7 @@ import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
 import {
   getFavorite, removeFavorite, saveFavorite,
 } from '../../helpers/tokenLocalStorage';
+import AppContext from '../../context/AppContext';
 
 const copy = require('clipboard-copy');
 
@@ -17,6 +18,7 @@ function DoneRecipesCard({ recipe, index, showHeart }) {
 
   const [linkCopied, setLinkCopied] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
+  const { setFavoriteRecipes } = useContext(AppContext);
 
   const url = `http://localhost:3000/${type}s/${id}`;
 
@@ -46,11 +48,13 @@ function DoneRecipesCard({ recipe, index, showHeart }) {
     };
     if (isFavorite) {
       removeFavorite(obj);
+      setFavoriteRecipes(getFavorite());
       handleHeart();
       return;
     }
     saveFavorite(obj);
     handleHeart();
+    setFavoriteRecipes(getFavorite());
   };
 
   return (

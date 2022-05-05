@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Header from '../components/Header';
-import { getFavorite } from '../helpers/tokenLocalStorage';
 import DoneRecipesCard from '../components/DoneRecipesCard';
+import AppContext from '../context/AppContext';
 
 function FavoriteRecipes() {
-  const favorites = getFavorite();
-  const [favoritesFilter, setFavoritesFilter] = useState(favorites);
+  const [favoritesFilter, setFavoritesFilter] = useState([]);
   const [filter, setFilter] = useState('');
+  const { favoriteRecipes } = useContext(AppContext);
 
   useEffect(() => {
     if (filter !== '') {
@@ -14,13 +14,17 @@ function FavoriteRecipes() {
     }
   }, [filter]);
 
+  useEffect(() => {
+    setFavoritesFilter(favoriteRecipes);
+  }, [favoriteRecipes]);
+
   return (
     <div>
       <Header title="Favorite Recipes" show={ false } />
       <button
         type="button"
         data-testid="filter-by-all-btn"
-        onClick={ () => setFavoritesFilter(favorites) }
+        onClick={ () => setFavoritesFilter(favoriteRecipes) }
         name="all"
       >
         All

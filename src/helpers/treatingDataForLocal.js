@@ -4,12 +4,14 @@ const treatRecipe = (id, recipe, type) => {
   const date = new Date();
   const dateNow = date.toLocaleDateString();
   const tagList = recipe.strTags ? recipe.strTags.split(',') : [];
+  const nationality = type === 'food' ? recipe.strArea : '';
+  const alcoholicOrNot = type === 'drink' ? recipe.strAlcoholic : '';
   const done = {
     id,
     type,
-    nationality: '',
+    nationality,
     category: recipe.strCategory,
-    alcoholicOrNot: recipe.strAlcoholic,
+    alcoholicOrNot,
     name: recipe.strDrink,
     image: recipe.strDrinkThumb,
     doneDate: dateNow,

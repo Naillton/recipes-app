@@ -4,6 +4,7 @@ import AppContext from './AppContext';
 
 import { ingredientsSearch, firstLetterSearch, nameSearch } from '../api/foodsAPI';
 import { ingredientDrink, ingredientDrinkName, firstLetterDrink } from '../api/drinksAPI';
+import { getFavorite } from '../helpers/tokenLocalStorage';
 
 function AppProvider({ children }) {
   const [showSearch, setShowSearch] = useState(false);
@@ -14,6 +15,7 @@ function AppProvider({ children }) {
   const [recomendationDrink, setRecomendationDrink] = useState([]);
   const [recomendationFood, setRecomendationFood] = useState([]);
   const [doneRecipes, setDoneRecipes] = useState([]);
+  const [favoriteRecipes, setFavoriteRecipes] = useState(getFavorite());
   const [ingredientChosen, setIngredientChosen] = useState('');
 
   const handleFoods = async (input, radio) => {
@@ -73,6 +75,8 @@ function AppProvider({ children }) {
         setDoneRecipes,
         ingredientChosen,
         setIngredientChosen,
+        favoriteRecipes,
+        setFavoriteRecipes,
       } }
     >
       { children }
