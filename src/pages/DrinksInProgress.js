@@ -100,57 +100,73 @@ function DrinksInProgress(props) {
   return (
     <div>
       <h1 className="header" data-testid="recipe-title">{ recipe.strDrink }</h1>
-      <img data-testid="recipe-photo" src={ recipe.strDrinkThumb } alt="" />
-      <button
-        type="button"
-        data-testid="share-btn"
-        onClick={ () => getLink() }
-      >
-        <img src={ shareIcon } alt="shareIcon" />
-      </button>
-      {linkCopied && <span>Link copied!</span>}
-      <button type="button" onClick={ handleClick }>
+      <div className="contImage">
         <img
-          src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
-          alt="Favorito"
-          data-testid="favorite-btn"
+          data-testid="recipe-photo"
+          className="image"
+          src={ recipe.strDrinkThumb }
+          alt=""
         />
-      </button>
-      <p
-        data-testid="recipe-category"
-      >
-        {`${recipe.strCategory} ${recipe.strAlcoholic}`}
-      </p>
-      { ingredients.filter((item) => recipe[item] !== null && recipe[item] !== '')
-        .map((i, index) => (
-          <label
-            key={ index }
-            data-testid={ `${index}-ingredient-step` }
-            htmlFor={ `ingredient-${index}` }
-          >
-            <input
-              type="checkbox"
-              id={ `ingredient-${index}` }
-              name={ index }
-              onClick={ ({ target }) => {
-                if (checkedIndex.includes(`${index}`)) {
-                  setCheckedIndex(checkedIndex.filter((e) => +e !== index));
-                  handleCheckBox();
-                  return;
-                }
-                setCheckedIndex([...checkedIndex, target.name]);
-                handleCheckBox();
-              } }
-            />
-            <span
+      </div>
+      <div className="contIcons">
+        <button
+          type="button"
+          className="btn"
+          data-testid="share-btn"
+          onClick={ () => getLink() }
+        >
+          <img className="icons" src={ shareIcon } alt="shareIcon" />
+        </button>
+        {linkCopied && <span>Link copied!</span>}
+        <button className="btn" type="button" onClick={ handleClick }>
+          <img
+            src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
+            alt="Favorito"
+            className="icons"
+            data-testid="favorite-btn"
+          />
+        </button>
+      </div>
+      <div className="receita">
+        <p
+          data-testid="recipe-category"
+        >
+          {`${recipe.strCategory} ${recipe.strAlcoholic}`}
+        </p>
+        { ingredients.filter((item) => recipe[item] !== null && recipe[item] !== '')
+          .map((i, index) => (
+            <label
               key={ index }
-              className={ checkedIndex.some((item) => +item === index) ? 'checkbox' : '' }
+              data-testid={ `${index}-ingredient-step` }
+              htmlFor={ `ingredient-${index}` }
             >
-              { recipe[i] !== '' && `${recipe[measure[index]]} ${recipe[i]}` }
-            </span>
-          </label>
-        ))}
-      <p data-testid="instructions">{ recipe.strInstructions }</p>
+              <input
+                type="checkbox"
+                id={ `ingredient-${index}` }
+                className="checks"
+                name={ index }
+                onClick={ ({ target }) => {
+                  if (checkedIndex.includes(`${index}`)) {
+                    setCheckedIndex(checkedIndex.filter((e) => +e !== index));
+                    handleCheckBox();
+                    return;
+                  }
+                  setCheckedIndex([...checkedIndex, target.name]);
+                  handleCheckBox();
+                } }
+              />
+              <span
+                key={ index }
+                className={
+                  checkedIndex.some((item) => +item === index) ? 'checkbox' : ''
+                }
+              >
+                { recipe[i] !== '' && `${recipe[measure[index]]} ${recipe[i]}` }
+              </span>
+            </label>
+          ))}
+      </div>
+      <p data-testid="instructions" className="text">{ recipe.strInstructions }</p>
       <button
         type="button"
         onClick={ finishRecipe }

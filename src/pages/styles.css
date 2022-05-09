@@ -28,9 +28,6 @@
   top: 0;
   left: 0;
   width: 100%;
-}
-
-h1 {
   background-color: orange;
   width: 500px;
   display: flex;
@@ -73,6 +70,13 @@ h1 {
 
 .text {
   padding: 20px;
+}
+
+.checks {
+  width: 30px;
+  height: 30px;
+  margin-bottom: 20px;
+  margin-right: 20px;
 }
 
 /* none solid black; */

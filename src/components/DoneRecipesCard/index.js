@@ -59,17 +59,16 @@ function DoneRecipesCard({ recipe, index, showHeart }) {
   };
 
   return (
-    <div>
+    <div className="recipes">
       <a href={ url }>
         <img
           src={ image }
           data-testid={ `${index}-horizontal-image` }
           alt={ name }
-          width="200"
-          className="food"
+          className="img"
         />
       </a>
-      <p data-testid={ `${index}-horizontal-top-text` }>
+      <p data-testid={ `${index}-horizontal-top-text` } className="paragraph">
         {nationality}
         {' - '}
         {category}
@@ -77,11 +76,17 @@ function DoneRecipesCard({ recipe, index, showHeart }) {
         {alcoholicOrNot}
       </p>
       <a href={ url }>
-        <p data-testid={ `${index}-horizontal-name` }>{name}</p>
+        <p className="link" data-testid={ `${index}-horizontal-name` }>{name}</p>
       </a>
-      <p data-testid={ `${index}-horizontal-done-date` }>{doneDate}</p>
+      <p
+        data-testid={ `${index}-horizontal-done-date` }
+        className="paragraph"
+      >
+        {doneDate}
+      </p>
       <button
         type="button"
+        className="btn"
         onClick={ () => getLink() }
       >
         <img

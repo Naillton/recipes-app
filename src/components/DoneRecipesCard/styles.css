@@ -3,3 +3,29 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+.recipes {
+  border: 1px solid black;
+  border-radius: 10px;
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  background-image: linear-gradient(0, rgb(221, 11, 11), rgb(252, 255, 96));
+}
+
+.img {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  margin-top: 20px;
+}
+
+.link {
+  color: black;
+}
+
+.paragraph {
+  color:black;
+}
