@@ -101,10 +101,11 @@ function DoneRecipesCard({ recipe, index, showHeart }) {
       ))}
       {
         showHeart && (
-          <button type="button" onClick={ handleFavorite }>
+          <button className="btn" type="button" onClick={ handleFavorite }>
             <img
               src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
               alt="FavoriteIcon"
+              className="icons"
               data-testid={ `${index}-horizontal-favorite-btn` }
             />
           </button>)
