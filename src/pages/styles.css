@@ -79,4 +79,22 @@
   margin-right: 20px;
 }
 
+.all {
+  display: flex;
+  flex-direction: column;
+  height: 300px;
+  justify-content: space-around;
+  margin-top: 50px;
+}
+
+.btnProfile {
+  background-image: linear-gradient(0, rgb(221, 11, 11), rgb(255, 185, 55));
+  border: none;
+  border-radius: 9px;
+  box-shadow: 5px 5px 5px rgb(236, 163, 80);
+  font-size: 14px;
+  height: 40px;
+  width: 120px;
+}
+
 /* none solid black; */
