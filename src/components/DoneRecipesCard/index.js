@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import shareIcon from '../../images/shareIcon.svg';
 import blackHeartIcon from '../../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
+import './styles.css';
 
 import {
   getFavorite, removeFavorite, saveFavorite,
@@ -65,6 +66,7 @@ function DoneRecipesCard({ recipe, index, showHeart }) {
           data-testid={ `${index}-horizontal-image` }
           alt={ name }
           width="200"
+          className="food"
         />
       </a>
       <p data-testid={ `${index}-horizontal-top-text` }>

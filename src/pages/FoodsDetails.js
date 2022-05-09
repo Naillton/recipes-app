@@ -104,60 +104,74 @@ function FoodsDetails(props) {
 
   return (
     <div>
-      <h1 data-testid="recipe-title">{ recipe.strMeal }</h1>
-      <img data-testid="recipe-photo" src={ recipe.strMealThumb } alt="" />
-      <button
-        type="button"
-        data-testid="share-btn"
-        onClick={ () => getLink() }
-      >
-        <img src={ shareIcon } alt="shareIcon" />
-      </button>
-      {linkCopied && <span>Link copied!</span>}
-      <button type="button" onClick={ handleClick }>
+      <h1 data-testid="recipe-title" className="header">{ recipe.strMeal }</h1>
+      <div className="contImage">
         <img
-          src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
-          alt="Favorito"
-          data-testid="favorite-btn"
+          className="image"
+          data-testid="recipe-photo"
+          src={ recipe.strMealThumb }
+          alt="food"
         />
-      </button>
-      <p data-testid="recipe-category">{ recipe.strCategory }</p>
-      { ingredients.map((i, index) => (
-        <p
-          key={ index }
-          data-testid={ `${index}-ingredient-name-and-measure` }
+      </div>
+      <div className="contIcons">
+        <button
+          type="button"
+          className="btn"
+          data-testid="share-btn"
+          onClick={ () => getLink() }
         >
-          { recipe[i] && `${recipe[measure[index]]} ${recipe[i]}` }
-        </p>
-        // <input type="checkbox" />
-      ))}
-      <p data-testid="instructions">{ recipe.strInstructions }</p>
-      <p>Details</p>
-      <iframe
-        title="video"
-        width="320"
-        height="240"
-        data-testid="video"
-        controls="controls"
-        allow="autoplay; encrypted-media"
-        src={ `https://www.youtube.com/embed/${recepiYTLink}` }
-      />
-      <div className="scroll">
+          <img className="icons" src={ shareIcon } alt="shareIcon" />
+        </button>
+        {linkCopied && <span>Link copied!</span>}
+        <button className="btn" type="button" onClick={ handleClick }>
+          <img
+            className="icons"
+            src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
+            alt="Favorito"
+            data-testid="favorite-btn"
+          />
+        </button>
+      </div>
+      <div className="receita">
+        <p data-testid="recipe-category">{ recipe.strCategory }</p>
+        { ingredients.map((i, index) => (
+          <p
+            key={ index }
+            data-testid={ `${index}-ingredient-name-and-measure` }
+          >
+            { recipe[i] && `${recipe[measure[index]]} ${recipe[i]}` }
+          </p>
+          // <input type="checkbox" />
+        ))}
+        <p data-testid="instructions" className="text">{ recipe.strInstructions }</p>
+        <p>Details</p>
+        <iframe
+          className="video"
+          title="video"
+          width="320"
+          height="240"
+          data-testid="video"
+          controls="controls"
+          allow="autoplay; encrypted-media"
+          src={ `https://www.youtube.com/embed/${recepiYTLink}` }
+        />
+        <div className="scroll">
 
-        {recomendationDrink && recomendationDrink.filter((r, i) => i < six)
-          .map((recomendation, index) => (
-            <div
-              data-testid={ `${index}-recomendation-card` }
-              key={ index }
-            >
-              <RecipeCard
-                name={ recomendation.strDrink }
-                index={ index }
-                img={ `${recomendation.strDrinkThumb}/preview` }
-                ingredient={ false }
-              />
-            </div>
-          ))}
+          {recomendationDrink && recomendationDrink.filter((r, i) => i < six)
+            .map((recomendation, index) => (
+              <div
+                data-testid={ `${index}-recomendation-card` }
+                key={ index }
+              >
+                <RecipeCard
+                  name={ recomendation.strDrink }
+                  index={ index }
+                  img={ `${recomendation.strDrinkThumb}/preview` }
+                  ingredient={ false }
+                />
+              </div>
+            ))}
+        </div>
       </div>
       { checkButton(doneRecipes) && (
         <button

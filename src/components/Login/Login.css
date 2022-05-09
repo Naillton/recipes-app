@@ -42,6 +42,7 @@ input {
   height: 40px;
   margin: 5px;
   width: 200px;
+  padding: 20px;
 }
 
 .login button {

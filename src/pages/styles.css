@@ -9,10 +9,70 @@
 .buttonStart, .buttonFinish {
   bottom: 0;
   position: fixed;
+  background-image: linear-gradient(0, rgb(221, 11, 11), rgb(255, 185, 55));
+  border: none;
+  border-radius: 9px;
+  box-shadow: 5px 5px 5px rgb(236, 163, 80);
+  font-size: 14px;
+  width: 110px;
+  margin: 20px;
 }
 
 .checkbox {
   text-decoration: line-through;
+}
+
+.header {
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+h1 {
+  background-color: orange;
+  width: 500px;
+  display: flex;
+  padding-left: 4%;
+  justify-content: space-between;
+}
+
+.contImage {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.image {
+  width: 300px;
+  height: 300px;
+  margin-top: 48px;
+}
+
+.contIcons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 20px;
+}
+
+.btn {
+  margin-right: 20px;
+}
+
+.receita {
+  display: flex;
+  flex-direction: column;
+}
+
+.video {
+  margin-bottom: 20px;
+}
+
+.text {
+  padding: 20px;
 }
 
 /* none solid black; */

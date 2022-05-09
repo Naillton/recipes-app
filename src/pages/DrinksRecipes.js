@@ -97,62 +97,76 @@ function DrinksRecipes(props) {
 
   return (
     <div>
-      <h1 data-testid="recipe-title">{ recipe.strDrink }</h1>
-      <img data-testid="recipe-photo" src={ recipe.strDrinkThumb } alt="" />
-      <button
-        type="button"
-        data-testid="share-btn"
-        onClick={ () => getLink() }
-      >
-        <img src={ shareIcon } alt="shareIcon" />
-      </button>
-      {linkCopied && <span>Link copied!</span>}
-      <button type="button" onClick={ handleClick }>
+      <h1 data-testid="recipe-title" className="header">{ recipe.strDrink }</h1>
+      <div className="contImage">
         <img
-          src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
-          alt="Favorito"
-          data-testid="favorite-btn"
+          className="image"
+          data-testid="recipe-photo"
+          src={ recipe.strDrinkThumb }
+          alt="drink"
         />
-      </button>
-      <p
-        data-testid="recipe-category"
-      >
-        {`${recipe.strCategory} ${recipe.strAlcoholic}`}
-      </p>
-      { ingredients.map((i, index) => (
-        <p
-          key={ index }
-          data-testid={ `${index}-ingredient-name-and-measure` }
+      </div>
+      <div className="contIcons">
+        <button
+          type="button"
+          className="btn"
+          data-testid="share-btn"
+          onClick={ () => getLink() }
         >
-          { recipe[i] && `${recipe[measure[index]]} ${recipe[i]}` }
+          <img className="icons" src={ shareIcon } alt="shareIcon" />
+        </button>
+        {linkCopied && <span>Link copied!</span>}
+        <button className="btn" type="button" onClick={ handleClick }>
+          <img
+            className="icons"
+            src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
+            alt="Favorito"
+            data-testid="favorite-btn"
+          />
+        </button>
+      </div>
+      <div className="receita">
+        <p
+          data-testid="recipe-category"
+        >
+          {`${recipe.strCategory} ${recipe.strAlcoholic}`}
         </p>
-      ))}
-      <p data-testid="instructions">{ recipe.strInstructions }</p>
-      <p>Details</p>
-      <iframe
-        title="video"
-        width="320"
-        height="240"
-        controls="controls"
-        data-testid="video"
-        allow="autoplay; encrypted-media"
-        src={ `https://www.youtube.com/embed/${recepiYTLink}` }
-      />
-      <div className="scroll">
-        {recomendationFood.length !== 0 && recomendationFood.filter((r, i) => i < six)
-          .map((recomendation, index) => (
-            <div
-              data-testid={ `${index}-recomendation-card` }
-              key={ index }
-            >
-              <RecipeCard
-                name={ recomendation.strMeal }
-                index={ index }
-                img={ `${recomendation.strMealThumb}/preview` }
-                ingredient={ false }
-              />
-            </div>
-          ))}
+        { ingredients.map((i, index) => (
+          <p
+            key={ index }
+            data-testid={ `${index}-ingredient-name-and-measure` }
+          >
+            { recipe[i] && `${recipe[measure[index]]} ${recipe[i]}` }
+          </p>
+        ))}
+        <p data-testid="instructions">{ recipe.strInstructions }</p>
+        <p>Details</p>
+        <iframe
+          className="video"
+          title="video"
+          width="320"
+          height="240"
+          controls="controls"
+          data-testid="video"
+          allow="autoplay; encrypted-media"
+          src={ `https://www.youtube.com/embed/${recepiYTLink}` }
+        />
+        <div className="scroll">
+          {recomendationFood.length !== 0 && recomendationFood.filter((r, i) => i < six)
+            .map((recomendation, index) => (
+              <div
+                data-testid={ `${index}-recomendation-card` }
+                key={ index }
+              >
+                <RecipeCard
+                  name={ recomendation.strMeal }
+                  index={ index }
+                  img={ `${recomendation.strMealThumb}/preview` }
+                  ingredient={ false }
+                />
+              </div>
+            ))}
+        </div>
       </div>
       { checkButton(doneRecipes) && (
         <button

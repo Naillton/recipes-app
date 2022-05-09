@@ -99,7 +99,7 @@ function DrinksInProgress(props) {
 
   return (
     <div>
-      <h1 data-testid="recipe-title">{ recipe.strDrink }</h1>
+      <h1 className="header" data-testid="recipe-title">{ recipe.strDrink }</h1>
       <img data-testid="recipe-photo" src={ recipe.strDrinkThumb } alt="" />
       <button
         type="button"
