@@ -6,36 +6,43 @@ import profile from '../../images/profileIcon.svg';
 import searchIcon from '../../images/searchIcon.svg';
 import AppContext from '../../context/AppContext';
 import Search from '../Search';
+import './Header.css';
 
 function Header({ title, show }) {
   const { showSearch, setShowSearch } = useContext(AppContext);
 
   return (
-    <header>
-      <Link to="/profile">
-        <img
-          src={ profile }
-          alt="profile"
-          data-testid="profile-top-btn"
-        />
-      </Link>
-      <div data-testid="page-title">
-        {' '}
-        { title }
-        {' '}
-      </div>
-      { show && (
-        <button type="button" onClick={ () => setShowSearch(!showSearch) }>
+    <div className="Header">
+      <header>
+        <Link to="/profile">
           <img
-            src={ searchIcon }
-            alt="icon"
-            data-testid="search-top-btn"
+            src={ profile }
+            alt="profile"
+            data-testid="profile-top-btn"
           />
-        </button>)}
-      {
-        showSearch && <Search />
-      }
-    </header>
+        </Link>
+        <div className="title" data-testid="page-title">
+          {' '}
+          { title }
+          {' '}
+        </div>
+        { show && (
+          <button
+            className="button-header"
+            type="button"
+            onClick={ () => setShowSearch(!showSearch) }
+          >
+            <img
+              src={ searchIcon }
+              alt="icon"
+              data-testid="search-top-btn"
+            />
+          </button>)}
+        {
+          showSearch && <Search />
+        }
+      </header>
+    </div>
   );
 }
 

@@ -6,6 +6,7 @@ import {
   categoryFilterDrink,
 } from '../../api/drinksAPI';
 import { categoriesList, categoryFilter } from '../../api/foodsAPI';
+import './Categories.css';
 
 const cinco = 5;
 
@@ -69,7 +70,7 @@ function Categories() {
   };
 
   return (
-    <div>
+    <div className="categories">
       <button
         type="button"
         data-testid="All-category-filter"

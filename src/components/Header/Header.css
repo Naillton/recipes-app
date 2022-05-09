@@ -1,0 +1,30 @@
+.Header {
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+header {
+  background-color: orange;
+  width: 500px;
+  display: flex;
+  padding-left: 4%;
+  justify-content: space-between;
+}
+
+.title {
+  font-size: 20px;
+  font-weight:bold;
+}
+
+.button-header {
+  background-color: orange;
+  border: none;
+  height: 30px;
+  left: 50%;
+  margin: 5px;
+  top: 50%;
+  width: 50px;
+}
