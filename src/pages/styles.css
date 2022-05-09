@@ -1,3 +1,7 @@
+body {
+  background-color:rgb(255, 249, 214);
+}
+
 .scroll {
   display: flex;
   flex-direction: 'row';
