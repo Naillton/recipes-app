@@ -1,3 +1,7 @@
+body {
+  background-color:rgb(255, 249, 214);
+}
+
 .scroll {
   display: flex;
   flex-direction: 'row';
@@ -165,4 +169,14 @@ padding-block-start: 15%;
   padding-top: 4%;
   padding-left: 6%;
   padding-block-end: 11%;
+}
+
+.btnProfile {
+  background-image: linear-gradient(0, rgb(221, 11, 11), rgb(255, 185, 55));
+  border: none;
+  border-radius: 9px;
+  box-shadow: 5px 5px 5px rgb(236, 163, 80);
+  font-size: 14px;
+  height: 40px;
+  width: 120px;
 }
