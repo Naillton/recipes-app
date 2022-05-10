@@ -120,11 +120,12 @@ function FoodsDetails(props) {
             data-testid="share-btn"
             onClick={ () => getLink() }
           >
-            <img src={ shareIcon } alt="shareIcon" />
+            <img className="icons" src={ shareIcon } alt="shareIcon" />
           </button>
           {linkCopied && <span>Link copied!</span>}
           <button className="favorite" type="button" onClick={ handleClick }>
             <img
+              className="icons"
               src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
               alt="Favorito"
               data-testid="favorite-btn"

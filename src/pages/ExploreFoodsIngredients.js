@@ -28,26 +28,28 @@ function ExploreFoodsIngredients() {
   };
 
   return (
-    <div>
+    <div className="explore-ingredients">
       <Header title="Explore Ingredients" show={ false } />
-      {
-        ingredientsListF && ingredientsListF
-          .filter((f, i) => i < doze).map((food, index) => (
-            <button
-              type="button"
-              key={ index }
-              onClick={ () => redirectClick(food.strIngredient) }
-            >
-              <RecipeCard
-                index={ index }
-                name={ food.strIngredient }
-                img={ `https://www.themealdb.com/images/ingredients/${food.strIngredient}-Small.png
-                ` }
+      <div className="explore-content-ingredient">
+        {
+          ingredientsListF && ingredientsListF
+            .filter((f, i) => i < doze).map((food, index) => (
+              <button
+                type="button"
                 key={ index }
-                ingredient="ingredient"
-              />
-            </button>))
-      }
+                onClick={ () => redirectClick(food.strIngredient) }
+              >
+                <RecipeCard
+                  index={ index }
+                  name={ food.strIngredient }
+                  img={ `https://www.themealdb.com/images/ingredients/${food.strIngredient}-Small.png
+                  ` }
+                  key={ index }
+                  ingredient="ingredient"
+                />
+              </button>))
+        }
+      </div>
       <Footer />
     </div>
   );

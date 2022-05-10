@@ -1,0 +1,35 @@
+.search {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+}
+
+.search-radio {
+  width: 20px;
+}
+.input-search {
+  background: #ececec;
+  font-size: 15px;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 5px 5px 5px rgb(139, 79, 9);
+  height: 30px;
+  margin: 2px;
+  margin-left: 17px;;
+  width: 200px;
+  padding: 17px;
+}
+
+.search-button {
+    background-color: rgb(255, 213, 96);
+    border: none;
+    border-radius: 9px;
+    box-shadow: 5px 5px 5px rgb(139, 79, 9);
+    cursor: pointer;
+    font-size: 15px;
+    height: 30px;
+    left: 50%;
+    margin: 5px;
+    top: 50%;
+    width: 70px;
+}

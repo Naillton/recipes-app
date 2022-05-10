@@ -44,10 +44,14 @@ function FoodsNacionalities() {
   }, [nationalitySelected, copyMeals]);
 
   return (
-    <div>
+    <div className="explore-nationalities">
       <Header title="Explore Nationalities" show />
 
-      <select onClick={ handleOption } data-testid="explore-by-nationality-dropdown">
+      <select
+        className="button-nationalities"
+        onClick={ handleOption }
+        data-testid="explore-by-nationality-dropdown"
+      >
         <option value="All" data-testid="All-option">All</option>
         {
           saveNationalities !== []
@@ -63,20 +67,20 @@ function FoodsNacionalities() {
             ))
         }
       </select>
-
-      {
-        meals.filter((f, i) => i < doze).map((food, index) => (
-          <Link to={ `/foods/${food.idMeal}` } key={ index }>
-            <RecipeCard
-              index={ index }
-              name={ food.strMeal }
-              img={ `${food.strMealThumb}/preview` }
-              key={ index }
-            />
-          </Link>
-        ))
-      }
-
+      <div className="recipe-card">
+        {
+          meals.filter((f, i) => i < doze).map((food, index) => (
+            <Link to={ `/foods/${food.idMeal}` } key={ index }>
+              <RecipeCard
+                index={ index }
+                name={ food.strMeal }
+                img={ `${food.strMealThumb}/preview` }
+                key={ index }
+              />
+            </Link>
+          ))
+        }
+      </div>
       <Footer />
     </div>
   );

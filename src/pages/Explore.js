@@ -7,7 +7,7 @@ function Explore() {
   const { push } = useHistory();
 
   return (
-    <div>
+    <div className="explore">
       <Header title="Explore" show={ false } />
       <div>
         <button

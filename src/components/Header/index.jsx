@@ -26,7 +26,7 @@ function Header({ title, show }) {
           { title }
           {' '}
         </div>
-        { show && (
+        { !show ? <p className="false">false</p> : (
           <button
             className="button-header"
             type="button"

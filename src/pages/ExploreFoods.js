@@ -13,7 +13,7 @@ function ExploreFoods() {
   };
 
   return (
-    <div>
+    <div className="explore-foods">
       <Header title="Explore Foods" show={ false } />
       <button
         type="button"

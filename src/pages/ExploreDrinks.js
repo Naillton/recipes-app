@@ -13,7 +13,7 @@ function ExploreDrinks() {
   };
 
   return (
-    <div>
+    <div className="explore-drinks">
       <Header title="Explore Drinks" show={ false } />
       <button
         type="button"

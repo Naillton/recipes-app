@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
 import AppContext from '../../context/AppContext';
+import './style.css';
 
 function Search() {
   const { handleCLickIngredients } = useContext(AppContext);
@@ -15,11 +16,13 @@ function Search() {
   }
 
   return (
-    <div>
+    <div className="search">
       <label htmlFor="search-input">
         <input
+          className="input-search"
           type="text"
           id="search-input"
+          placeholder="Search Recipe"
           value={ saveSearchInput }
           data-testid="search-input"
           onChange={ handleChange }
@@ -29,6 +32,7 @@ function Search() {
         <label htmlFor="ingredientSearch">
           Ingredients
           <input
+            className="search-radio"
             type="radio"
             name="radioSearch"
             id="ingredientSearch"
@@ -39,6 +43,7 @@ function Search() {
         <label htmlFor="nameSearch">
           Name
           <input
+            className="search-radio"
             type="radio"
             name="radioSearch"
             id="nameSearch"
@@ -49,6 +54,7 @@ function Search() {
         <label htmlFor="firstLetterSearch">
           First Letter
           <input
+            className="search-radio"
             type="radio"
             name="radioSearch"
             id="firstLetterSearch"
@@ -58,6 +64,7 @@ function Search() {
         </label>
         <button
           type="button"
+          className="search-button"
           data-testid="exec-search-btn"
           onClick={ () => handleCLickIngredients(saveSearchInput, saveRadio) }
         >

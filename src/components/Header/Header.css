@@ -10,18 +10,15 @@ header {
   background-color: orange;
   width: 500px;
   display: flex;
-  padding: 2px;
-  padding-left: 4%;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding-left: 10px;
 }
 
 .title-header {
   font-size: 20px;
   font-weight:bold;
-  margin-left: 18%;
-}
-
-.button-profile {
-  margin-right: 40px;
+  padding-left: 7px;
 }
 
 .button-header {
@@ -29,8 +26,11 @@ header {
   border: none;
   height: 30px;
   left: 50%;
-  margin: 5px;
-  padding-left: 30%;
+  margin: 4px;
   top: 50%;
   width: 50px;
+}
+
+.false {
+  color: orange;
 }

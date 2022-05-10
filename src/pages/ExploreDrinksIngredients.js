@@ -28,25 +28,27 @@ function ExploreDrinksIngredients() {
   };
 
   return (
-    <div>
+    <div className="explore-ingredients">
       <Header title="Explore Ingredients" show={ false } />
-      {
-        ingredientsList && ingredientsList
-          .filter((f, i) => i < doze).map((drink, index) => (
-            <button
-              type="button"
-              key={ index }
-              onClick={ () => redirectClick(drink.strIngredient1) }
-            >
-              <RecipeCard
-                index={ index }
-                name={ drink.strIngredient1 }
-                img={ `https://www.thecocktaildb.com/images/ingredients/${drink.strIngredient1}-Small.png` }
+      <div className="explore-content-ingredient">
+        {
+          ingredientsList && ingredientsList
+            .filter((f, i) => i < doze).map((drink, index) => (
+              <button
+                type="button"
                 key={ index }
-                ingredient="ingredient"
-              />
-            </button>))
-      }
+                onClick={ () => redirectClick(drink.strIngredient1) }
+              >
+                <RecipeCard
+                  index={ index }
+                  name={ drink.strIngredient1 }
+                  img={ `https://www.thecocktaildb.com/images/ingredients/${drink.strIngredient1}-Small.png` }
+                  key={ index }
+                  ingredient="ingredient"
+                />
+              </button>))
+        }
+      </div>
       <Footer />
     </div>
   );
