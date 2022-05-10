@@ -19,35 +19,37 @@ function FavoriteRecipes() {
   }, [favoriteRecipes]);
 
   return (
-    <div>
+    <div className="favorites">
       <Header title="Favorite Recipes" show={ false } />
-      <button
-        type="button"
-        data-testid="filter-by-all-btn"
-        onClick={ () => setFavoritesFilter(favoriteRecipes) }
-        name="all"
-      >
-        All
+      <div className="favorite-recipes-buttons">
+        <button
+          type="button"
+          data-testid="filter-by-all-btn"
+          onClick={ () => setFavoritesFilter(favoriteRecipes) }
+          name="all"
+        >
+          All
 
-      </button>
-      <button
-        type="button"
-        data-testid="filter-by-food-btn"
-        onClick={ ({ target }) => setFilter(target.name) }
-        name="food"
-      >
-        Food
+        </button>
+        <button
+          type="button"
+          data-testid="filter-by-food-btn"
+          onClick={ ({ target }) => setFilter(target.name) }
+          name="food"
+        >
+          Food
 
-      </button>
-      <button
-        type="button"
-        data-testid="filter-by-drink-btn"
-        onClick={ ({ target }) => setFilter(target.name) }
-        name="drink"
-      >
-        Drinks
+        </button>
+        <button
+          type="button"
+          data-testid="filter-by-drink-btn"
+          onClick={ ({ target }) => setFilter(target.name) }
+          name="drink"
+        >
+          Drinks
 
-      </button>
+        </button>
+      </div>
       {favoritesFilter.filter((e) => e !== null).map((recipe, index) => (
         <DoneRecipesCard
           key={ index }

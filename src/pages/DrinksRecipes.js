@@ -96,51 +96,60 @@ function DrinksRecipes(props) {
   const recepiYTLink = recipe.strYoutube && recipe.strYoutube.split('=')[1];
 
   return (
-    <div>
-      <h1 data-testid="recipe-title" className="header">{ recipe.strDrink }</h1>
-      <div className="contImage">
-        <img
-          className="image"
-          data-testid="recipe-photo"
-          src={ recipe.strDrinkThumb }
-          alt="drink"
-        />
-      </div>
-      <div className="contIcons">
-        <button
-          type="button"
-          className="btn"
-          data-testid="share-btn"
-          onClick={ () => getLink() }
+    <div className="drinks-details">
+      <img
+        className="image"
+        data-testid="recipe-photo"
+        src={ recipe.strDrinkThumb }
+        alt="drink"
+        width="360px"
+      />
+      <div className="share-favorite">
+        <h1
+          className="title-drinks-details"
+          data-testid="recipe-title"
         >
-          <img className="icons" src={ shareIcon } alt="shareIcon" />
-        </button>
-        {linkCopied && <span>Link copied!</span>}
-        <button className="btn" type="button" onClick={ handleClick }>
-          <img
-            className="icons"
-            src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
-            alt="Favorito"
-            data-testid="favorite-btn"
-          />
-        </button>
+          { recipe.strDrink }
+        </h1>
+        <div>
+          <button
+            className="share"
+            type="button"
+            data-testid="share-btn"
+            onClick={ () => getLink() }
+          >
+            <img src={ shareIcon } alt="shareIcon" />
+          </button>
+          {linkCopied && <span>Link copied!</span>}
+          <button className="favorite" type="button" onClick={ handleClick }>
+            <img
+              src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
+              alt="Favorito"
+              data-testid="favorite-btn"
+            />
+          </button>
+        </div>
       </div>
-      <div className="receita">
+      <div>
         <p
+          className="category"
           data-testid="recipe-category"
         >
           {`${recipe.strCategory} ${recipe.strAlcoholic}`}
         </p>
-        { ingredients.map((i, index) => (
-          <p
-            key={ index }
-            data-testid={ `${index}-ingredient-name-and-measure` }
-          >
-            { recipe[i] && `${recipe[measure[index]]} ${recipe[i]}` }
-          </p>
-        ))}
-        <p data-testid="instructions">{ recipe.strInstructions }</p>
-        <p>Details</p>
+        <p className="title-ingredients">Ingredients</p>
+        <div className="ingredients">
+          { ingredients.map((i, index) => (
+            <p
+              key={ index }
+              data-testid={ `${index}-ingredient-name-and-measure` }
+            >
+              { recipe[i] && `- ${recipe[measure[index]]} ${recipe[i]}.` }
+            </p>
+          ))}
+        </div>
+        <p className="title-instructions">Instructions</p>
+        <p className="text" data-testid="instructions">{ recipe.strInstructions }</p>
         <iframe
           className="video"
           title="video"

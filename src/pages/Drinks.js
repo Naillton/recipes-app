@@ -46,21 +46,24 @@ function Drinks() {
   }, []);
 
   return (
-    <div>
-      <Header title="Drinks" show />
-      <Categories />
-      {data.drinks && data.drinks.filter((f, i) => i < doze).map((drink, index) => (
-        <Link to={ `/drinks/${drink.idDrink}` } key={ index }>
-          <RecipeCard
-            index={ index }
-            name={ drink.strDrink }
-            img={ drink.strDrinkThumb }
-            key={ index }
-          />
-        </Link>
-      ))}
-
-      <Footer />
+    <div className="drinks">
+      <div className="drink-content">
+        <Header title="Drinks" show />
+        <Categories />
+        <div className="recipe-card">
+          {data.drinks && data.drinks.filter((f, i) => i < doze).map((drink, index) => (
+            <Link to={ `/drinks/${drink.idDrink}` } key={ index }>
+              <RecipeCard
+                index={ index }
+                name={ drink.strDrink }
+                img={ drink.strDrinkThumb }
+                key={ index }
+              />
+            </Link>
+          ))}
+        </div>
+        <Footer />
+      </div>
     </div>
   );
 }

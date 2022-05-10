@@ -47,7 +47,7 @@ export default function Login() {
   return (
     <div className="login-body">
       <div className="login">
-        <h1 className="title">Lets cook!</h1>
+        <h1 className="title-login">Lets cook!</h1>
         <img
           src="https://media0.giphy.com/media/QCDEzQNCt9eTXdhIzb/giphy.gif?cid=ecf05e477yyont5xxp8bgrcb6obxfgxirir40glzchaxcx0l&rid=giphy.gif&ct=s"
           alt="carrot"

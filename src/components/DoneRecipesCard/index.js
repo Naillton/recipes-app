@@ -59,56 +59,74 @@ function DoneRecipesCard({ recipe, index, showHeart }) {
   };
 
   return (
-    <div className="recipes">
-      <a href={ url }>
-        <img
-          src={ image }
-          data-testid={ `${index}-horizontal-image` }
-          alt={ name }
-          className="img"
-        />
-      </a>
-      <p data-testid={ `${index}-horizontal-top-text` } className="paragraph">
-        {nationality}
-        {' - '}
-        {category}
-        {' - '}
-        {alcoholicOrNot}
-      </p>
-      <a href={ url }>
-        <p className="link" data-testid={ `${index}-horizontal-name` }>{name}</p>
-      </a>
-      <p
-        data-testid={ `${index}-horizontal-done-date` }
-        className="paragraph"
-      >
-        {doneDate}
-      </p>
-      <button
-        type="button"
-        className="btn"
-        onClick={ () => getLink() }
-      >
-        <img
-          src={ shareIcon }
-          alt="shareIcon"
-          data-testid={ `${index}-horizontal-share-btn` }
-        />
-      </button>
-      {linkCopied && <span>Link copied!</span>}
-      {tags && tags.filter((i, r) => r < 2).map((tag, i) => (
-        <span data-testid={ `${index}-${tag}-horizontal-tag` } key={ i }>{tag}</span>
-      ))}
-      {
-        showHeart && (
-          <button type="button" onClick={ handleFavorite }>
+    <div className="done-recipes-card">
+      <div>
+        <a href={ url }>
+          <img
+            src={ image }
+            data-testid={ `${index}-horizontal-image` }
+            alt={ name }
+            className="img"
+            width="150px"
+          />
+        </a>
+      </div>
+      <div className="paragraph">
+        <div className="title-share">
+          <p
+            className="title-done-recipes"
+            data-testid={ `${index}-horizontal-top-text` }
+          >
+            {`${nationality}-${category}-${alcoholicOrNot}`}
+          </p>
+          <button
+            type="button"
+            className="btn"
+            onClick={ () => getLink() }
+          >
             <img
-              src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
-              alt="FavoriteIcon"
-              data-testid={ `${index}-horizontal-favorite-btn` }
+              src={ shareIcon }
+              alt="shareIcon"
+              data-testid={ `${index}-horizontal-share-btn` }
             />
-          </button>)
-      }
+          </button>
+          {
+            showHeart && (
+              <button className="btn-favorite" type="button" onClick={ handleFavorite }>
+                <img
+                  src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
+                  alt="FavoriteIcon"
+                  data-testid={ `${index}-horizontal-favorite-btn` }
+                />
+              </button>)
+          }
+        </div>
+        <a href={ url }>
+          <p
+            className="title-done"
+            data-testid={ `${index}-horizontal-name` }
+          >
+            {name}
+          </p>
+        </a>
+        {linkCopied && <span>Link copied!</span>}
+        {tags && tags.filter((i, r) => r < 2).map((tag, i) => (
+          <span
+            className="title-done"
+            data-testid={ `${index}-${tag}-horizontal-tag` }
+            key={ i }
+          >
+            {tag}
+          </span>
+        ))}
+        {!showHeart && (
+          <p
+            className="date"
+            data-testid={ `${index}-horizontal-done-date` }
+          >
+            {`Done in: ${doneDate}`}
+          </p>)}
+      </div>
     </div>
   );
 }

@@ -5,7 +5,7 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Login from './components/Login';
-import Foods from './pages/Foods/Foods';
+import Foods from './pages/Foods';
 import Drinks from './pages/Drinks';
 import Explore from './pages/Explore';
 import Profile from './pages/Profile';

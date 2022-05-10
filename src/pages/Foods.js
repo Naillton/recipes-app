@@ -1,12 +1,12 @@
 import React, { useEffect, useContext } from 'react';
 import { useHistory, Link } from 'react-router-dom';
-import Header from '../../components/Header';
-import Footer from '../../components/Footer';
-import AppContext from '../../context/AppContext';
-import RecipeCard from '../../components/RecipeCard';
-import { ingredientsSearch, nameSearch } from '../../api/foodsAPI';
-import Categories from '../../components/Categories';
-import './Foods.css';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
+import AppContext from '../context/AppContext';
+import RecipeCard from '../components/RecipeCard';
+import { ingredientsSearch, nameSearch } from '../api/foodsAPI';
+import Categories from '../components/Categories';
+import './styles.css';
 
 const doze = 12;
 function Foods() {

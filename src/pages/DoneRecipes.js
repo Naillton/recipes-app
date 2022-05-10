@@ -19,35 +19,37 @@ function DoneRecipes() {
   }, [filter]);
 
   return (
-    <div>
+    <div className="done-recipes">
       <Header title="Done Recipes" show={ false } />
-      <button
-        type="button"
-        data-testid="filter-by-all-btn"
-        onClick={ () => setDoneRecipesFilter(doneRecipes) }
-        name="all"
-      >
-        All
+      <div className="done-recipes-buttons">
+        <button
+          type="button"
+          data-testid="filter-by-all-btn"
+          onClick={ () => setDoneRecipesFilter(doneRecipes) }
+          name="all"
+        >
+          All
 
-      </button>
-      <button
-        type="button"
-        data-testid="filter-by-food-btn"
-        onClick={ ({ target }) => setFilter(target.name) }
-        name="food"
-      >
-        Food
+        </button>
+        <button
+          type="button"
+          data-testid="filter-by-food-btn"
+          onClick={ ({ target }) => setFilter(target.name) }
+          name="food"
+        >
+          Food
 
-      </button>
-      <button
-        type="button"
-        data-testid="filter-by-drink-btn"
-        onClick={ ({ target }) => setFilter(target.name) }
-        name="drink"
-      >
-        Drinks
+        </button>
+        <button
+          type="button"
+          data-testid="filter-by-drink-btn"
+          onClick={ ({ target }) => setFilter(target.name) }
+          name="drink"
+        >
+          Drinks
 
-      </button>
+        </button>
+      </div>
       {doneRecipesFilter.map((recipe, index) => (
         <DoneRecipesCard key={ index } recipe={ recipe } index={ index } />
       ))}

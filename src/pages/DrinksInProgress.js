@@ -98,74 +98,80 @@ function DrinksInProgress(props) {
   }, [checkedIndex]);
 
   return (
-    <div>
-      <h1 className="header" data-testid="recipe-title">{ recipe.strDrink }</h1>
-      <div className="contImage">
-        <img
-          data-testid="recipe-photo"
-          className="image"
-          src={ recipe.strDrinkThumb }
-          alt=""
-        />
-      </div>
-      <div className="contIcons">
-        <button
-          type="button"
-          className="btn"
-          data-testid="share-btn"
-          onClick={ () => getLink() }
-        >
-          <img className="icons" src={ shareIcon } alt="shareIcon" />
-        </button>
-        {linkCopied && <span>Link copied!</span>}
-        <button className="btn" type="button" onClick={ handleClick }>
-          <img
-            src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
-            alt="Favorito"
-            className="icons"
-            data-testid="favorite-btn"
-          />
-        </button>
+    <div className="drinks-in-progress">
+      <img
+        data-testid="recipe-photo"
+        className="image"
+        src={ recipe.strDrinkThumb }
+        alt="drink"
+        width="360px"
+      />
+      <div className="share-favorite">
+        <h1 data-testid="recipe-title">{ recipe.strDrink }</h1>
+        <div>
+          <button
+            type="button"
+            className="share"
+            data-testid="share-btn"
+            onClick={ () => getLink() }
+          >
+            <img className="icons" src={ shareIcon } alt="shareIcon" />
+          </button>
+          {linkCopied && <span>Link copied!</span>}
+          <button className="favorite" type="button" onClick={ handleClick }>
+            <img
+              src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
+              alt="Favorito"
+              className="icons"
+              data-testid="favorite-btn"
+            />
+          </button>
+        </div>
       </div>
       <div className="receita">
         <p
+          className="category"
           data-testid="recipe-category"
         >
           {`${recipe.strCategory} ${recipe.strAlcoholic}`}
         </p>
-        { ingredients.filter((item) => recipe[item] !== null && recipe[item] !== '')
-          .map((i, index) => (
-            <label
-              key={ index }
-              data-testid={ `${index}-ingredient-step` }
-              htmlFor={ `ingredient-${index}` }
-            >
-              <input
-                type="checkbox"
-                id={ `ingredient-${index}` }
-                className="checks"
-                name={ index }
-                onClick={ ({ target }) => {
-                  if (checkedIndex.includes(`${index}`)) {
-                    setCheckedIndex(checkedIndex.filter((e) => +e !== index));
-                    handleCheckBox();
-                    return;
-                  }
-                  setCheckedIndex([...checkedIndex, target.name]);
-                  handleCheckBox();
-                } }
-              />
-              <span
+        <p className="title-ingredients">Ingredients</p>
+        <div className="ingredients-check">
+          { ingredients.filter((item) => recipe[item] !== null && recipe[item] !== '')
+            .map((i, index) => (
+              <label
                 key={ index }
-                className={
-                  checkedIndex.some((item) => +item === index) ? 'checkbox' : ''
-                }
+                data-testid={ `${index}-ingredient-step` }
+                htmlFor={ `ingredient-${index}` }
               >
-                { recipe[i] !== '' && `${recipe[measure[index]]} ${recipe[i]}` }
-              </span>
-            </label>
-          ))}
+                <input
+                  type="checkbox"
+                  id={ `ingredient-${index}` }
+                  className="checks"
+                  name={ index }
+                  onClick={ ({ target }) => {
+                    if (checkedIndex.includes(`${index}`)) {
+                      setCheckedIndex(checkedIndex.filter((e) => +e !== index));
+                      handleCheckBox();
+                      return;
+                    }
+                    setCheckedIndex([...checkedIndex, target.name]);
+                    handleCheckBox();
+                  } }
+                />
+                <span
+                  key={ index }
+                  className={
+                    checkedIndex.some((item) => +item === index) ? 'checkbox' : ''
+                  }
+                >
+                  { recipe[i] !== '' && `${recipe[measure[index]]} ${recipe[i]}` }
+                </span>
+              </label>
+            ))}
+        </div>
       </div>
+      <p className="title-instructions">Instructions</p>
       <p data-testid="instructions" className="text">{ recipe.strInstructions }</p>
       <button
         type="button"

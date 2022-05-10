@@ -103,48 +103,52 @@ function FoodsDetails(props) {
   const recepiYTLink = recipe.strYoutube && recipe.strYoutube.split('=')[1];
 
   return (
-    <div>
-      <h1 data-testid="recipe-title" className="header">{ recipe.strMeal }</h1>
-      <div className="contImage">
-        <img
-          className="image"
-          data-testid="recipe-photo"
-          src={ recipe.strMealThumb }
-          alt="food"
-        />
-      </div>
-      <div className="contIcons">
-        <button
-          type="button"
-          className="btn"
-          data-testid="share-btn"
-          onClick={ () => getLink() }
-        >
-          <img className="icons" src={ shareIcon } alt="shareIcon" />
-        </button>
-        {linkCopied && <span>Link copied!</span>}
-        <button className="btn" type="button" onClick={ handleClick }>
-          <img
-            className="icons"
-            src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
-            alt="Favorito"
-            data-testid="favorite-btn"
-          />
-        </button>
-      </div>
-      <div className="receita">
-        <p data-testid="recipe-category">{ recipe.strCategory }</p>
-        { ingredients.map((i, index) => (
-          <p
-            key={ index }
-            data-testid={ `${index}-ingredient-name-and-measure` }
+    <div className="food-details">
+      <img
+        className="image"
+        data-testid="recipe-photo"
+        src={ recipe.strMealThumb }
+        alt="food"
+        width="360px"
+      />
+      <div className="share-favorite">
+        <h1 data-testid="recipe-title">{ recipe.strMeal }</h1>
+        <div>
+          <button
+            className="share"
+            type="button"
+            data-testid="share-btn"
+            onClick={ () => getLink() }
           >
-            { recipe[i] && `${recipe[measure[index]]} ${recipe[i]}` }
-          </p>
-          // <input type="checkbox" />
-        ))}
+            <img src={ shareIcon } alt="shareIcon" />
+          </button>
+          {linkCopied && <span>Link copied!</span>}
+          <button className="favorite" type="button" onClick={ handleClick }>
+            <img
+              src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
+              alt="Favorito"
+              data-testid="favorite-btn"
+            />
+          </button>
+        </div>
+      </div>
+      <div>
+        <p className="category" data-testid="recipe-category">{ recipe.strCategory }</p>
+        <p className="title-ingredients">Ingredients</p>
+        <div className="ingredients">
+          { ingredients.map((i, index) => (
+            <p
+              className="ingredient"
+              key={ index }
+              data-testid={ `${index}-ingredient-name-and-measure` }
+            >
+              { recipe[i] && `- ${recipe[measure[index]]} ${recipe[i]}.` }
+            </p>
+            // <input type="checkbox" />
+          ))}
+        </div>
+        <p className="title-instructions">Instructions</p>
         <p data-testid="instructions" className="text">{ recipe.strInstructions }</p>
-        <p>Details</p>
         <iframe
           className="video"
           title="video"

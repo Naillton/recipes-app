@@ -3,23 +3,64 @@
   flex-direction: 'row';
   height: 250px;
   overflow: auto;
-  width: 200px;
+  width: 100%;
 }
 
 .buttonStart, .buttonFinish {
   bottom: 0;
+  display: flex;
   position: fixed;
   background-image: linear-gradient(0, rgb(221, 11, 11), rgb(255, 185, 55));
   border: none;
   border-radius: 9px;
   box-shadow: 5px 5px 5px rgb(236, 163, 80);
+  justify-content: center;
+  font-size: 17px;
+  margin:2%;
+  width: 96%;
+  height: 40px;
+}
+
+.done-recipes-buttons button, .favorite-recipes-buttons button {
+  background-image: linear-gradient(0, rgb(221, 11, 11), rgb(255, 185, 55));
+  border: none;
+  border-radius: 9px;
+  box-shadow: 5px 5px 5px rgb(236, 163, 80);
   font-size: 14px;
+  height: 30px;
+  left: 50%;
+  margin: 5px;
+  top: 50%;
   width: 110px;
-  margin: 20px;
 }
 
 .checkbox {
   text-decoration: line-through;
+}
+
+.share-favorite {
+  background-color: orange;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-left: 1%;
+  padding-right: 1%;
+}
+
+
+.share, .favorite {
+  background-color:orange;
+  border: none;
+}
+
+.food-details, .food-in-progress, .done-recipes, .drinks-details, .drinks-in-progress, .favorites {
+  background-color: rgb(255, 249, 214);
+  padding-block-end: 15%;
+}
+
+
+.done-recipes, .favorites {
+padding-block-start: 15%;
 }
 
 .header {
@@ -42,12 +83,6 @@
   justify-content: center;
 }
 
-.image {
-  width: 300px;
-  height: 300px;
-  margin-top: 48px;
-}
-
 .contIcons {
   display: flex;
   flex-direction: row;
@@ -59,24 +94,75 @@
   margin-right: 20px;
 }
 
-.receita {
+.category {
+  background-color: orange;
+  padding-left: 2%;
+}
+
+.ingredient {
+  padding-left: 4%;
+}
+
+.ingredients, .ingredients-check {
+  background-color: white;
+  border-radius: 10px;
+  border: solid rgb(238, 234, 234) 1px;
+  margin: 6%;
+  margin-top: 2%;
+}
+
+.ingredients-check {
   display: flex;
   flex-direction: column;
+  padding-left: 0%;
+}
+
+.title-ingredients, .title-instructions {
+  font-size: 20px;
+  margin-top: 10%;
+  text-decoration: bold;
+  text-align: center;
 }
 
 .video {
   margin-bottom: 20px;
+  margin-left: 6%; 
 }
 
 .text {
-  padding: 20px;
+  padding: 15px;
+  background-color: white;
+  border-radius: 10px;
+  border: solid rgb(238, 234, 234) 1px;
+  margin: 6%;
+  margin-top: 2%;
 }
 
 .checks {
-  width: 30px;
-  height: 30px;
-  margin-bottom: 20px;
+  width: 20px;
+  height: 20px;
+  margin-top: 7%;
+  margin-left: 1px;
   margin-right: 20px;
 }
 
-/* none solid black; */
+.foods, .drinks {
+  background-color:rgb(255, 249, 214);
+  padding-top: 15%;
+  display: flex;
+  flex-direction: column;
+}
+
+.food-content, .drink-content {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.recipe-card {
+  display: flex;
+  flex-wrap: wrap;
+  padding-top: 4%;
+  padding-left: 6%;
+  padding-block-end: 11%;
+}

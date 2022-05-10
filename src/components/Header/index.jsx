@@ -14,14 +14,14 @@ function Header({ title, show }) {
   return (
     <div className="Header">
       <header>
-        <Link to="/profile">
+        <Link className="button-profile" to="/profile">
           <img
             src={ profile }
             alt="profile"
             data-testid="profile-top-btn"
           />
         </Link>
-        <div className="title" data-testid="page-title">
+        <div className="title-header" data-testid="page-title">
           {' '}
           { title }
           {' '}
