@@ -18,6 +18,7 @@ function Search() {
   return (
     <div className="search">
       <label htmlFor="search-input">
+        <hr />
         <input
           className="input-search"
           type="text"

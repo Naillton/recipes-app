@@ -93,6 +93,23 @@ padding-block-start: 15%;
   text-align: center;
 }
 
+.gif-drink {
+  margin-left: 38%;
+  margin-top: 20%;
+  padding-block-end: 10%;
+}
+
+.gif-food {
+  margin-left: 28%;
+  margin-top: 15%;
+}
+
+.gif-search {
+  margin-left: 38%;
+  margin-top: 20%;
+  padding-block-end: 10%;
+}
+
 .all {
  display: flex;
  flex-direction: column;
@@ -121,6 +138,12 @@ padding-block-start: 15%;
   display: flex;
   flex-direction: column;
   padding-top: 5%;
+}
+
+.content-profile img {
+  background-color: rgb(255, 213, 96);
+  border-radius: 50%;
+  border: solid rgb(255, 213, 96) 5px;
 }
 
 .header {
@@ -174,7 +197,8 @@ padding-block-start: 15%;
 .ingredients-check {
   display: flex;
   flex-direction: column;
-  padding-left: 0%;
+  align-items: flex-start;
+  padding-left: 10px;
 }
 
 .title-ingredients, .title-instructions {

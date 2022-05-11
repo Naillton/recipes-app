@@ -15,6 +15,12 @@ function ExploreFoods() {
   return (
     <div className="explore-foods">
       <Header title="Explore Foods" show={ false } />
+      <img
+        className="gif-food"
+        alt="gif-food"
+        width="180px"
+        src="https://media2.giphy.com/media/kj0mk5gT1WvPn8INif/giphy.gif?cid=ecf05e47mhqe86wi6qs5u5qi45q86btqnyk21vzu9fg3p58v&rid=giphy.gif&ct=s"
+      />
       <button
         type="button"
         name="byIngredient"

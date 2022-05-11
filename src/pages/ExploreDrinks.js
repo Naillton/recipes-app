@@ -15,6 +15,12 @@ function ExploreDrinks() {
   return (
     <div className="explore-drinks">
       <Header title="Explore Drinks" show={ false } />
+      <img
+        className="gif-drink"
+        alt="gif-drink"
+        width="100px"
+        src="https://media0.giphy.com/media/ZaQvK2f4IN59E9vsHy/giphy.gif?cid=ecf05e47m19w4ozjj6ag8696vz9w30mc5fyydy5x7w5vdhps&rid=giphy.gif&ct=s"
+      />
       <button
         type="button"
         name="byIngredient"
