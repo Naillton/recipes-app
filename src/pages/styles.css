@@ -1,5 +1,5 @@
 body {
-  background-color:rgb(255, 249, 214);
+  background-color: rgb(255, 249, 214);
 }
 
 .scroll {
@@ -11,18 +11,18 @@ body {
 }
 
 .buttonStart, .buttonFinish {
-  bottom: 0;
-  display: flex;
-  position: fixed;
   background-image: linear-gradient(0, rgb(221, 11, 11), rgb(255, 185, 55));
   border: none;
   border-radius: 9px;
+  bottom: 0;
   box-shadow: 5px 5px 5px rgb(236, 163, 80);
-  justify-content: center;
+  display: flex;
   font-size: 17px;
-  margin:2%;
-  width: 96%;
   height: 40px;
+  justify-content: center;
+  margin: 2%;
+  position: fixed;
+  width: 96%;
 }
 
 .done-recipes-buttons button, .favorite-recipes-buttons button {
@@ -52,7 +52,7 @@ body {
 }
 
 .share, .favorite {
-  background-color:orange;
+  background-color: orange;
   border: none;
   margin: 3px;
 }
@@ -63,17 +63,19 @@ body {
   padding-block-end: 15%;
 }
 
-.done-recipes, .favorites, .profile, .explore, .explore-foods, .explore-ingredients, .explore-nationalities, .explore-drinks {
-padding-block-start: 15%;
+.done-recipes, .favorites, .profile, .explore, .explore-foods, .explore-ingredients,
+.explore-nationalities, .explore-drinks {
+  padding-block-start: 15%;
 }
 
 .explore-content-ingredient button {
-  background-color:rgb(255, 249, 214);
+  background-color: rgb(255, 249, 214);
   border: none;
 }
+
 .explore-content-ingredient {
-  padding-left: 5%;
   padding-block-end: 13%;
+  padding-left: 5%;
 }
 
 .explore button, .explore-foods button, .button-nationalities, .explore-drinks button {
@@ -87,10 +89,10 @@ padding-block-start: 15%;
   height: 40px;
   left: 50%;
   margin: 10px;
-  padding-top: 2%;
   margin-left: 35%;
-  width: 120px;
+  padding-top: 2%;
   text-align: center;
+  width: 120px;
 }
 
 .gif-drink {
@@ -111,9 +113,9 @@ padding-block-start: 15%;
 }
 
 .all {
- display: flex;
- flex-direction: column;
- padding-top: 5%;
+  display: flex;
+  flex-direction: column;
+  padding-top: 5%;
 }
 
 .btnProfile {
@@ -121,17 +123,17 @@ padding-block-start: 15%;
 }
 
 .profile-email {
-  text-align: center;
   font-size: 20px;
   padding-top: 5%;
+  text-align: center;
 }
 
 .not-found {
   display: flex;
   font-size: 30px;
-  text-decoration:underline;
   justify-content: center;
   padding-top: 50%;
+  text-decoration: underline;
 }
 
 .content-profile {
@@ -142,21 +144,19 @@ padding-block-start: 15%;
 
 .content-profile img {
   background-color: rgb(255, 213, 96);
-  border-radius: 50%;
   border: solid rgb(255, 213, 96) 5px;
+  border-radius: 50%;
 }
 
 .header {
+  background-color: orange;
   display: flex;
+  justify-content: space-between;
+  left: 0;
+  padding-left: 4%;
   position: fixed;
   top: 0;
-  left: 0;
   width: 100%;
-  background-color: orange;
-  width: 500px;
-  display: flex;
-  padding-left: 4%;
-  justify-content: space-between;
 }
 
 .contImage {
@@ -188,23 +188,22 @@ padding-block-start: 15%;
 
 .ingredients, .ingredients-check {
   background-color: white;
-  border-radius: 10px;
   border: solid rgb(238, 234, 234) 1px;
+  border-radius: 10px;
   margin: 6%;
   margin-top: 2%;
 }
 
 .ingredients-check {
+  align-items: flex-start;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
   padding-left: 10px;
 }
 
 .title-ingredients, .title-instructions {
   font-size: 20px;
   margin-top: 10%;
-  text-decoration: bold;
   text-align: center;
 }
 
@@ -214,27 +213,27 @@ padding-block-start: 15%;
 }
 
 .text {
-  padding: 15px;
   background-color: white;
-  border-radius: 10px;
   border: solid rgb(238, 234, 234) 1px;
+  border-radius: 10px;
   margin: 6%;
   margin-top: 2%;
+  padding: 15px;
 }
 
 .checks {
-  width: 20px;
   height: 20px;
-  margin-top: 7%;
   margin-left: 1px;
   margin-right: 20px;
+  margin-top: 7%;
+  width: 20px;
 }
 
 .foods, .drinks {
-  background-color:rgb(255, 249, 214);
-  padding-top: 15%;
+  background-color: rgb(255, 249, 214);
   display: flex;
   flex-direction: column;
+  padding-top: 15%;
 }
 
 .food-content, .drink-content {
@@ -246,9 +245,9 @@ padding-block-start: 15%;
 .recipe-card {
   display: flex;
   flex-wrap: wrap;
-  padding-top: 4%;
-  padding-left: 6%;
   padding-block-end: 11%;
+  padding-left: 6%;
+  padding-top: 4%;
 }
 
 .btnProfile {

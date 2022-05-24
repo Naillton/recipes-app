@@ -15,8 +15,8 @@
 .title-login {
   font-size: 25px;
   height: 30%;
-  text-align: center;
   padding-top: 2%;
+  text-align: center;
 }
 
 h2 {
@@ -36,14 +36,14 @@ h2 {
 
 .login input {
   background: #ececec;
-  font-size: 15px;
   border: none;
   border-radius: 5px;
   box-shadow: 5px 5px 5px rgb(139, 79, 9);
+  font-size: 15px;
   height: 40px;
   margin: 5px;
-  width: 200px;
   padding: 20px;
+  width: 200px;
 }
 
 .login button {

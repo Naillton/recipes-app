@@ -1,14 +1,24 @@
 .recipe {
   background-color: white;
+  border: solid  rgb(172, 167, 167) 1px;
+  border-radius: 10px;
+  color: black;
   display: flex;
   flex-direction: column;
-  border-radius: 10px;
-  padding: 1%;
   margin: 2%;
-  text-decoration: underline;
-  color: black;
-  border: solid rgb(172, 167, 167) 1px;
-  width: 160px;
-  margin-right: 6px;
   margin-left: 0px;
+  margin-right: 6px;
+  padding: 1%;
+  text-decoration: none;
+  width: 160px;
+}
+
+.recipe:hover {
+  background-color:rgb(212, 206, 206);
+  border: solid  black 1px;
+  transition: 2s;
+}
+
+.recipe img {
+  border-radius: 10px;
 }

@@ -1,23 +1,22 @@
 .Header {
   display: flex;
+  left: 0;
   position: fixed;
   top: 0;
-  left: 0;
   width: 100%;
 }
 
 header {
   background-color: orange;
-  width: 500px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   padding-left: 10px;
+  width: 500px;
 }
 
 .title-header {
   font-size: 20px;
-  font-weight:bold;
   padding-left: 7px;
 }
 

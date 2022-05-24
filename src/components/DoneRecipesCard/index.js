@@ -77,7 +77,7 @@ function DoneRecipesCard({ recipe, index, showHeart }) {
             className="title-done-recipes"
             data-testid={ `${index}-horizontal-top-text` }
           >
-            {`${nationality}-${category}-${alcoholicOrNot}`}
+            {`${nationality} ${category} ${alcoholicOrNot}`}
           </p>
           <button
             type="button"
