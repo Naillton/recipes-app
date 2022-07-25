@@ -37,7 +37,9 @@
     "lint:styles": "npx stylelint '**/*.css'"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "plugins": [
+      "react-hooks"
+    ]
   },
   "browserslist": {
     "production": [
